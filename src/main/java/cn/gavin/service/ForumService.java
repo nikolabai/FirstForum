@@ -1,4 +1,4 @@
-package cn.gaivin.service;
+package cn.gavin.service;
 
 public class ForumService {
 
