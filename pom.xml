@@ -5,13 +5,13 @@
   <!--2.自动生成版本信息 -->
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.gavin</groupId>
-  <artifactId>PSSH2</artifactId>
+  <artifactId>FirstForum</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
   
   <!--3.项目信息，项目名称，项目主页的url -->
-  <name>pssh2</name>
+  <name>FirstForum</name>
   <url>http://maven.apache.org</url>
   <description></description> <!-- project的描述 -->
   <inceptionYear></inceptionYear><!-- 工程的初始时间 -->
@@ -33,7 +33,7 @@
 
     <!-- 5.定义maven的编译器。。 maven打成war包放到tomcat目录下，即可运行 -->
 	<build>
-		<finalName>PSSH2</finalName>
+		<finalName>FirstForum</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
