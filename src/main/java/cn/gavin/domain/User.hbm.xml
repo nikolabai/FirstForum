@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-27 19:32:30 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <joined-subclass name="cn.gavin.domain.User" extends="cn.gavin.domain.BaseDomain" table="USER" lazy="false">
+        <key>
+            <column name="ID" />
+        </key>
+        <property name="userId" type="int">
+            <column name="USERID" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="lastIp" type="java.lang.String">
+            <column name="LASTIP" />
+        </property>
+        <property name="lastVisit" type="java.util.Date">
+            <column name="LASTVISIT" />
+        </property>
+        <property name="userType" type="long">
+            <column name="USERTYPE" />
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+        <property name="locked" type="long">
+            <column name="LOCKED" />
+        </property>
+        <property name="credit" type="int">
+            <column name="CREDIT" />
+        </property>
+    </joined-subclass>
+</hibernate-mapping>

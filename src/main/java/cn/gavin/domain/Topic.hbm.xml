@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-27 19:32:30 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <joined-subclass name="cn.gavin.domain.Topic" extends="cn.gavin.domain.BaseDomain" table="TOPIC" lazy="false">
+        <key>
+            <column name="ID" />
+        </key>
+        <property name="topicId" type="int">
+            <column name="TOPICID" />
+        </property>
+        <property name="toplicTitle" type="java.lang.String">
+            <column name="TOPLICTITLE" />
+        </property>
+        <property name="creatTime" type="java.util.Date">
+            <column name="CREATTIME" />
+        </property>
+        <property name="replies" type="int">
+            <column name="REPLIES" />
+        </property>
+        <property name="lastPost" type="java.util.Date">
+            <column name="LASTPOST" />
+        </property>
+        <property name="digest" type="int">
+            <column name="DIGEST" />
+        </property>
+        <many-to-one name="user" class="cn.gavin.domain.User" fetch="join">
+            <column name="USER" />
+        </many-to-one>
+        <property name="views" type="int">
+            <column name="VIEWS" />
+        </property>
+    </joined-subclass>
+</hibernate-mapping>
