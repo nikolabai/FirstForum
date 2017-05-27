@@ -22,6 +22,6 @@ public class BaseController {
 	
 	//获取基于应用程序的URL绝对路径
 	public final String getAppbaseUrl(HttpServletRequest request,String user){
-		Assert.hasLength(text);
+		Assert.hasLength();
 	}
 }
