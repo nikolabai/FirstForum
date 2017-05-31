@@ -1,6 +1,8 @@
 package cn.gavin.dao;
 
-public class LoginLogDao {
+import cn.gavin.domain.LoginLog;
+
+public class LoginLogDao extends BaseDao<LoginLog>{
 	
 
 }

@@ -5,6 +5,8 @@ package cn.gavin.domain;
  * @2017年3月27日
  */
 
+import java.util.Date;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,7 @@ public class LoginLog extends BaseDomain{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int loginLogId;
 	private String ip;
-	private String loginDate;
+	private Date loginDate;
 	private User user;
 	
 	
@@ -41,11 +43,11 @@ public class LoginLog extends BaseDomain{
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public String getLoginDate() {
+	public Date getLoginDate() {
 		return loginDate;
 	}
-	public void setLoginDate(String loginDate) {
-		this.loginDate = loginDate;
+	public void setLoginDate(Date date) {
+		this.loginDate = date;
 	}
 	public User getUser() {
 		return user;

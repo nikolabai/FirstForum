@@ -50,7 +50,7 @@ public class Post extends BaseDomain{
 	private Date creatTime;
 	
 	@ManyToOne
-	@JoinColumn(name = "uset_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE})

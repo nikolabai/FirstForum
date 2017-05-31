@@ -5,6 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.util.Assert;
 
 import cn.gavin.domain.User;
+/**
+ * 
+ * @author Gavin
+ * @2017年5月31日
+ */
 
 public class BaseController {
 	protected static final String ERROR_MSG_KEY="error_Msg";

@@ -22,6 +22,7 @@ public class Topic extends BaseDomain{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int topicId;
+	private int boardId;
 	private String toplicTitle;
 	private Date creatTime;
 	private Date lastPost;
@@ -29,6 +30,11 @@ public class Topic extends BaseDomain{
 	private int replies;
 	private int digest;
 	private User user;
+	//addbygavin
+	private String topicText;
+	
+	
+	
 	public int getTopicId() {
 		return topicId;
 	}
@@ -77,6 +83,17 @@ public class Topic extends BaseDomain{
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public String getTopicText() {
+		return topicText;
+	}
+	public void setTopicText(String topicText) {
+		this.topicText = topicText;
+	}
+	public int getBoardId() {
+		return boardId;
+	}
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
+	}
 	
-
 }

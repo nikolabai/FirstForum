@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-3-27 19:32:30 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-5-31 16:01:00 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <joined-subclass name="cn.gavin.domain.LoginLog" extends="cn.gavin.domain.BaseDomain" table="LOGINLOG" lazy="false">
         <key>
@@ -13,7 +13,7 @@
         <property name="ip" type="java.lang.String">
             <column name="IP" />
         </property>
-        <property name="loginDate" type="java.lang.String">
+        <property name="loginDate" type="java.util.Date">
             <column name="LOGINDATE" />
         </property>
         <many-to-one name="user" class="cn.gavin.domain.User" fetch="join">

@@ -1,6 +1,7 @@
 package cn.gavin.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +30,10 @@ public class User extends BaseDomain{
 	private int credit;
 	private Date lastVisit;
 	private String lastIp;
+//	private List<Board> manBoard;
+	
+	
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -77,6 +82,12 @@ public class User extends BaseDomain{
 	public void setLastIp(String lastIp) {
 		this.lastIp = lastIp;
 	}
+//	public List<Board> getManBoard() {
+//		return manBoard;
+//	}
+//	public void setManBoard(List<Board> manBoard) {
+//		this.manBoard = manBoard;
+//	}
 	
 	
 	

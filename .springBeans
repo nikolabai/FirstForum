@@ -11,6 +11,7 @@
 		<config>src/main/resources/spring.xml</config>
 		<config>src/main/resources/spring-mvc.xml</config>
 		<config>src/main/resources/spring-dao.xml</config>
+		<config>src/main/resources/spring-service.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
