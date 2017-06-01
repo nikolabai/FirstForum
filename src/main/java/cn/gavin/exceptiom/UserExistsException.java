@@ -5,8 +5,8 @@ public class UserExistsException extends Exception{
 		super();
 		}
 
-	public UserExistsException(String string) {
-		super(string);
+	public UserExistsException(String message) {
+		super(message);
 	}
 
 	
