@@ -22,7 +22,7 @@ public class BaseController {
 	}
 	
 	//2.将用户对象保存到Session中
-	protected void setSessionUser(HttpServletRequest request,User user){
+	protected  void setSessionUser(HttpServletRequest request,User user){
 		request.getSession().setAttribute("user",user);
 	}
 	
