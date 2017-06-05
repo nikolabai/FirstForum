@@ -137,6 +137,5 @@ public class ForumService {
 //			userDao.update(user);
 //		}
 //	}
-	
 
 }

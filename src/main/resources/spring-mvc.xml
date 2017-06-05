@@ -33,7 +33,14 @@
     <bean id="messageSource"
     	class="org.springframework.context.support.ResourceBundleMessageSource"
     	p:basename=""/>
+    
+    
+    
     <!-- web异常解析处理 -->
+    <!--  Spring MVC处理异常有3种方式： 
+		（1）使用Spring MVC提供的简单异常处理器SimpleMappingExceptionResolver； 
+		（2）实现Spring的异常处理接口HandlerExceptionResolver 自定义自己的异常处理器； 
+		（3）使用@ExceptionHandler注解实现异常处理； -->
     <!-- <bean id="exceptionResolver"
     	class="cn.gavin.exception.ForumHandlerExceptionResolver">
     	<property name="defaultErrorView">
@@ -45,5 +52,20 @@
     		</props>
     	</property>
     </bean> -->
+   <!--  <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+	    定义默认的异常处理页面，当该异常类型的注册时使用  
+	    <property name="defaultErrorView" value="error"></property>  
+	    定义异常处理页面用来获取异常信息的变量名，默认名为exception  
+	    <property name="exceptionAttribute" value="ex"></property>  
+	    定义需要特殊处理的异常，用类名或完全路径名作为key，异常以页名作为值  
+	    <property name="exceptionMappings">  
+	        <props>  
+	            创建自己所要自定义的异常类
+	            <prop key="com.core.exception.BusinessException">business_error</prop>  
+	            <prop key="com.core.exception.ParameterException">parameter_error</prop>  
+	            还可以继续扩展对不同异常类型的处理  
+	        </props>  
+	    </property>  
+	</bean> -->
 
 </beans>
