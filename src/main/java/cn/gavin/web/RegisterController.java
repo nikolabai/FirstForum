@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.gavin.domain.User;
-import cn.gavin.exceptiom.UserExistsException;
+import cn.gavin.exception.UserExistsException;
 import cn.gavin.service.UserService;
 
 /**

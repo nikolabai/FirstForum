@@ -1,4 +1,4 @@
-package cn.gavin.exceptiom;
+package cn.gavin.exception;
 
 public class UserExistsException extends Exception{
 	public UserExistsException() {

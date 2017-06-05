@@ -10,7 +10,7 @@ import cn.gavin.dao.LoginLogDao;
 import cn.gavin.dao.UserDao;
 import cn.gavin.domain.LoginLog;
 import cn.gavin.domain.User;
-import cn.gavin.exceptiom.UserExistsException;
+import cn.gavin.exception.UserExistsException;
 
 /**
  * 
