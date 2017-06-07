@@ -4,6 +4,7 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation=
 		"http://www.springmodules.org/schema/cache/springmodules-cache.xsd 
 		http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd
@@ -16,7 +17,16 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<!-- ************************************DAO层配置*********************************************** -->
+	<!-- *********************************************************************************** -->
+	<!-- 1.配置自动扫描的包 -->
+	<!-- 扫描dao包下@repository的组件 -->
+	<context:component-scan base-package="cn.gavin.dao"></context:component-scan>
+	<!-- 扫描cn.gavin.service包下所有标注@service的服务组件 -->
+	<context:component-scan base-package="cn.gavin.service"></context:component-scan>
+	
+	<!-- ************************************数据源配置*********************************************** -->
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
 	<!-- 配置数据源 -->
 	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
 		<property name="driverClassName" value="${jdbc_driverClassName}" />
@@ -25,6 +35,7 @@
 		<property name="password" value="${jdbc_password}" />
 	</bean>
 	
+	<!-- ************************************配置hibernate session工厂 *********************************************** -->
 	<!-- 配置hibernate session工厂 -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -44,44 +55,36 @@
 				<!-- 配置二级缓存实现类-->
 				<!-- <prop key="hibernate.cache.region.factory_class">true</prop> -->
 				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
-				
 			</props>
 		</property>
-		
-        
+		<!-- 2.配置 hibernate 映射文件的位置及名称, 可以使用通配符 -->
+		<property name="mappingLocations" 
+				value="classpath:cn/gavin/domain/*.hbm.xml"></property>
 
-		<!--2.自动扫描注解方式配置的hibernate类文件(扫描基于JPA注解PO类目录 -->
+		<!--3.自动扫描注解方式配置的hibernate类文件(扫描基于JPA注解PO类目录 -->
 		<property name="packagesToScan">
 			<list>
 				<value>cn.gavin.domain</value>
 			</list>
 		</property> 
-		
-		<property name="mappingResources">
-			<list> 
-				<value>cn/gavin/domain/Board.hbm.xml</value>
-				<value>cn/gavin/domain/Post.hbm.xml</value>
-				<value>cn/gavin/domain/LoginLog.hbm.xml</value>
-				<value>cn/gavin/domain/Topic.hbm.xml</value>
-				<value>cn/gavin/domain/User.hbm.xml</value>
-			</list>
-		</property>
-		
-		<!-- 配置哪些实体类的对象需要二级缓存 -->
-        <!-- <class-cache usage="read-write,fixedRegion" class="cn.gavin.domain.Board"/>
-        <class-cache usage="read-write,freqChangeRegion" class="cn.gavin.domain.User"/>
-        <class-cache usage="read-write,freqChangeRegion" class="cn.gavin.domain.Topic"/>
-        <class-cache usage="read-write,freqChangeRegion" class="cn.gavin.domain.Post"/> --> 
 	</bean>
-	<!-- ************************************服务层配置*********************************************** -->
-	<!-- 配置事务管理器 -->
-	<bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	<!-- 注解方式配置事物 -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" />  -->
+	<!-- ************************************二级缓存********************************************** -->
+	<!-- 基于EHcache的系统缓存管理器 -->
+	<bean id ="cacheManager"
+		  class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+		  p:configLocation="classpath:ehcache.xml"/>
+		  
+	<!-- ************************************事务********************************************** -->	  
+	<!-- 1.事务管理器 -->
+	<bean id="transactionManager"
+			class="org.springframework.orm.hibernate5.HibernateTransactionManager"
+			p:sessionFactory-ref="sessionFactory"/>
+	<!-- 3.使用更强大的切点表达式语言轻松定义目标方法 -->
 	
-	<!-- 拦截器方式配置事物 -->
+	<!-- 注解方式配置事物 -->
+	 <tx:annotation-driven transaction-manager="transactionManager" />  
+	
+	<!-- 拦截器方式配置事物    ；  配置事务属性, 需要事务管理器 -->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="add*" />
@@ -102,17 +105,11 @@
 		</tx:attributes>
 	</tx:advice>
 	
-	<!-- 使用强大的切点表达式语言轻松定义目标方法 -->
+	<!-- 使用强大的切点表达式语言轻松定义目标方法 ；配置事务切点, 并把切点和事务属性关联起来-->
 	<aop:config>
 		<!-- 通过AOP定义事物增强切面 -->
-		<aop:pointcut id="transactionPointcut" expression="execution(* com.gavin.service..*Impl.*(..))" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.gavin.service.*.*(..))" />
 		<!-- 引用事物增强 -->
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
-
-	<!-- 基于EHcache的系统缓存管理器 -->
-	<bean id ="cacheManager"
-		  class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-		  p:configLocation="classpath:ehcache.xml"/> 
-
 </beans>

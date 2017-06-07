@@ -8,10 +8,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+
 
 /**
  * 
@@ -23,41 +25,64 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 public class BaseDao<T> {
 	private Class<T> entityClass;
 	@Autowired
-	private HibernateTemplate ht;
-	
-	
-//	public Session getSession();
-	
-	
+	private SessionFactory sessionFactory;
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 	//根据ID加载PO实例
 	public T load(Serializable id ) {
-		return (T)ht.load(entityClass,id);
+		Session session = sessionFactory.openSession();
+		T entity = session.load(entityClass, id);
+		session.flush();
+		session.close();
+		return entity;
 	}
 	//根据ID获取PO实例
 	public T get(Serializable id) {
-		 return (T)ht.get(entityClass,id);
+		Session session = sessionFactory.openSession();
+		T entity = session.get(entityClass, id);
+		session.flush();
+		session.close();
+		return entity;
 	}
 	//获取po的所有对象
-	public T loadAll() {
-		return (T)ht.loadAll(entityClass);
-	}
+//	public T loadAll() {
+//		Session session = sessionFactory.openSession();
+//		T entity = session.loadAll(entityClass);
+//		session.flush();
+//		session.close();
+//		return entity;
+//	}
 	//保存po
 	public void save (T entity ) {
-		ht.save(entity);
+		Session session = sessionFactory.openSession();
+		session.save(entity);
+		session.flush();
+		session.close();
+		
 	}
 	/**
 	 * 删除po
 	 * @param entity
 	 */
 	public void remove (T entity) {
-		ht.delete(entity);
+		Session session = sessionFactory.openSession();
+		session.delete(entity);
+		session.flush();
+		session.close();
 	}
 	/**
 	 * 更新po
 	 * @param entity
 	 */
 	public void update (T entity) {
-		ht.update(entity);
+		Session session = sessionFactory.openSession();
+		session.update(entity);
+		session.flush();
+		session.close();
 	}
 	/**
 	 * 执行HQL查询
@@ -65,7 +90,16 @@ public class BaseDao<T> {
 	 * @return
 	 */
 	public List find(String hql) {
-		return ht.find(hql);
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery(hql);
+		List list = query.getResultList();
+		session.close();
+		if (list.isEmpty()) {
+			return  null;
+		}
+		else {
+			return list;
+		}
 	}
 	/**
 	 * 执行带参的HQL查询
@@ -73,41 +107,38 @@ public class BaseDao<T> {
 	 * @param params
 	 * @return
 	 */
-	public List find(String hql,Object params) {
-		return ht.find(hql,params);
-	}
+//	public List find(String hql,Object params) {
+//		
+//		return hibernateTemplate.find(hql,params);
+//	}
 	/**
 	 * 对延迟加载的实体po执行初始化
 	 * @param entity
 	 */
-	public void initializae(Object entity ) {
-		ht.initialize(entity);
-	}
+//	public void initializae(Object entity ) {
+//		Session session = sessionFactory.openSession();
+//		session.
+//		
+//		hibernateTemplate.initialize(entity);
+//	}
 	
 	/*********************************HQL*************************************/
 	//分页查询
 	public List<?> queryForPage(String hql,int pageNo,int pageSize) {
-		List list =(List) ht.execute(new HibernateCallback<Object>(){
-            public Object doInHibernate(Session session){
-            	List list2 = session.createQuery(hql)
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery(hql);
+        List list = session.createQuery(hql)
                         .setFirstResult(pageNo)
                         .setMaxResults(pageSize)
                         .getResultList();                   
-                return list2;
-            }
-		});
-        return list;
+                return list;
 	}
 //    总记录条数
 	public int getCount(String hql) {
-//		List list =(List) ht.execute(new HibernateCallback(){
-//            public Object doInHibernate(Session session){
-//            	List list3 = session.createQuery(hql).getResultList();
-//            	
-//            }
-//		});
-//		return Integer.parseInt(list3.get(0).toString());;
-		return ((Integer)ht.iterate(hql).next()).intValue(); 
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery(hql);
+		int count = ((Long) query.iterate().next()).intValue();
+		return count; 
 	}
 				 
 		

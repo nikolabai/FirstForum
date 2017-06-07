@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-5-31 16:01:00 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="cn.gavin.domain.Board" extends="cn.gavin.domain.BaseDomain" table="BOARD" lazy="false">
+    <joined-subclass name="cn.gavin.domain.Board" extends="cn.gavin.domain.BaseDomain" table="t_BOARD" lazy="false">
         <!-- <cache usage="read-write"/> -->
         <key>
             <column name="ID" />
