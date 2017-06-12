@@ -18,13 +18,11 @@ import cn.gavin.domain.Board;
 @Repository
 public class BoardDao extends BaseDao<Board>{
 	protected final String GET_BOARD_NUM="select count(f.boardld)from Board f";
+	@Autowired
 	private SessionFactory sessionFactory;
-	
-	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}

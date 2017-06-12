@@ -5,6 +5,7 @@ package cn.gavin.domain;
  * @2017年3月27日
  */
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_login_log")
-public class LoginLog extends BaseDomain{
+public class LoginLog implements Serializable{
 	
 	
 	@Id
@@ -54,6 +55,11 @@ public class LoginLog extends BaseDomain{
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	@Override
+	public String toString() {
+		return "LoginLog [loginLogId=" + loginLogId + ", ip=" + ip + ", loginDate=" + loginDate + ", user=" + user
+				+ "]";
 	}
 	
 

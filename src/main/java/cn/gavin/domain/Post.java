@@ -1,5 +1,6 @@
 package cn.gavin.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
@@ -31,7 +32,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="post_type",discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("1")
-public class Post extends BaseDomain{
+public class Post implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "post_id")
@@ -98,6 +99,11 @@ public class Post extends BaseDomain{
 	}
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+	@Override
+	public String toString() {
+		return "Post [postld=" + postld + ", postTitle=" + postTitle + ", postText=" + postText + ", boardId=" + boardId
+				+ ", creatTime=" + creatTime + ", user=" + user + ", topic=" + topic + "]";
 	}
 	
 

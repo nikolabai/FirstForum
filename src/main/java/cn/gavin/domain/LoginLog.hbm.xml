@@ -1,15 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-5-31 16:01:00 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-9 10:18:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="cn.gavin.domain.LoginLog" extends="cn.gavin.domain.BaseDomain" table="t_LOGINLOG" lazy="false">
-        <key>
-            <column name="ID" />
-        </key>
-        <property name="loginLogId" type="int">
+    <class name="cn.gavin.domain.LoginLog" table="t_login_log">
+        <id name="loginLogId" type="int">
             <column name="LOGINLOGID" />
-        </property>
+            <generator class="assigned" />
+        </id>
         <property name="ip" type="java.lang.String">
             <column name="IP" />
         </property>
@@ -19,5 +17,5 @@
         <many-to-one name="user" class="cn.gavin.domain.User" fetch="join">
             <column name="USER" />
         </many-to-one>
-    </joined-subclass>
+    </class>
 </hibernate-mapping>

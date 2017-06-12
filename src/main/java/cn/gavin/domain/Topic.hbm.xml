@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-5-31 16:01:00 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-9 10:18:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="cn.gavin.domain.Topic" extends="cn.gavin.domain.BaseDomain" table="t_TOPIC" lazy="false">
-        <key>
-            <column name="ID" />
-        </key>
-        <property name="topicId" type="int">
+    <class name="cn.gavin.domain.Topic" table="t_login_log">
+        <id name="topicId" type="int">
             <column name="TOPICID" />
+            <generator class="assigned" />
+        </id>
+        <property name="boardId" type="int">
+            <column name="BOARDID" />
         </property>
         <property name="toplicTitle" type="java.lang.String">
             <column name="TOPLICTITLE" />
@@ -16,26 +17,23 @@
         <property name="creatTime" type="java.util.Date">
             <column name="CREATTIME" />
         </property>
-        <property name="replies" type="int">
-            <column name="REPLIES" />
-        </property>
         <property name="lastPost" type="java.util.Date">
             <column name="LASTPOST" />
+        </property>
+        <property name="views" type="int">
+            <column name="VIEWS" />
+        </property>
+        <property name="replies" type="int">
+            <column name="REPLIES" />
         </property>
         <property name="digest" type="int">
             <column name="DIGEST" />
         </property>
-        <property name="boardId" type="int">
-            <column name="BOARDID" />
-        </property>
-        <property name="topicText" type="java.lang.String">
-            <column name="TOPICTEXT" />
-        </property>
         <many-to-one name="user" class="cn.gavin.domain.User" fetch="join">
             <column name="USER" />
         </many-to-one>
-        <property name="views" type="int">
-            <column name="VIEWS" />
+        <property name="topicText" type="java.lang.String">
+            <column name="TOPICTEXT" />
         </property>
-    </joined-subclass>
+    </class>
 </hibernate-mapping>

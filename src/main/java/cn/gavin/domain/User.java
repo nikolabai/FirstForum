@@ -1,5 +1,6 @@
 package cn.gavin.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_login_log")
-public class User extends BaseDomain{
+public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userId;
@@ -88,6 +89,11 @@ public class User extends BaseDomain{
 //	public void setManBoard(List<Board> manBoard) {
 //		this.manBoard = manBoard;
 //	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", userType=" + userType
+				+ ", locked=" + locked + ", credit=" + credit + ", lastVisit=" + lastVisit + ", lastIp=" + lastIp + "]";
+	}
 	
 	
 	

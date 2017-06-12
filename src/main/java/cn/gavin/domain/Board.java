@@ -5,6 +5,8 @@ package cn.gavin.domain;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_board")
-public class Board extends BaseDomain{
+public class Board implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int boardId;
@@ -47,6 +49,11 @@ public class Board extends BaseDomain{
 	}
 	public void setTopicNum(int topicNum) {
 		this.topicNum = topicNum;
+	}
+	@Override
+	public String toString() {
+		return "Board [boardId=" + boardId + ", boardName=" + boardName + ", boardDesc=" + boardDesc + ", topicNum="
+				+ topicNum + "]";
 	}
 	
 

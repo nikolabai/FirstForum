@@ -23,6 +23,8 @@
 	<context:component-scan base-package="cn.gavin.dao"></context:component-scan>
 	<!-- 扫描cn.gavin.service包下所有标注@service的服务组件 -->
 	<context:component-scan base-package="cn.gavin.service"></context:component-scan>
+	<!-- 扫描cn.gavin.domain包下所有标注@Entity的服务组件 -->
+	<context:component-scan base-package="cn.gavin.domain"></context:component-scan>
 	
 	<!-- ************************************数据源配置*********************************************** -->
 	<!-- 引入属性文件 -->
@@ -62,17 +64,18 @@
 				value="classpath:cn/gavin/domain/*.hbm.xml"></property>
 
 		<!--3.自动扫描注解方式配置的hibernate类文件(扫描基于JPA注解PO类目录 -->
-		<property name="packagesToScan">
+		<!-- <property name="packagesToScan">
 			<list>
 				<value>cn.gavin.domain</value>
 			</list>
-		</property> 
+		</property>  -->
 	</bean>
 	<!-- ************************************二级缓存********************************************** -->
 	<!-- 基于EHcache的系统缓存管理器 -->
 	<bean id ="cacheManager"
 		  class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-		  p:configLocation="classpath:ehcache.xml"/>
+		  p:configLocation="classpath:ehcache.xml"
+		   p:shared="true"/> 
 		  
 	<!-- ************************************事务********************************************** -->	  
 	<!-- 1.事务管理器 -->

@@ -17,8 +17,15 @@
         http://www.springframework.org/schema/mvc  
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
 	
+	
+	<!-- 启用spring mvc 注解 -->
+    <context:annotation-config />
+    
+    
 	<!-- 自动扫描cn.gavin.web包下的@Controller标注的类控制器 -->
 	<context:component-scan base-package="cn.gavin.web"/>
+	
+	
 	
 	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

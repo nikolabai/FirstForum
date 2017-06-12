@@ -1,24 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-5-31 16:01:00 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-9 10:18:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="cn.gavin.domain.Board" extends="cn.gavin.domain.BaseDomain" table="t_BOARD" lazy="false">
-        <!-- <cache usage="read-write"/> -->
-        <key>
-            <column name="ID" />
-        </key>
-        <property name="boardId" type="int">
+    <class name="cn.gavin.domain.Board" table="t_board">
+        <id name="boardId" type="int">
             <column name="BOARDID" />
-        </property>
-        <property name="topicNum" type="int">
-            <column name="TOPICNUM" />
+            <generator class="assigned" />
+        </id>
+        <property name="boardName" type="java.lang.String">
+            <column name="BOARDNAME" />
         </property>
         <property name="boardDesc" type="java.lang.String">
             <column name="BOARDDESC" />
         </property>
-        <property name="boardName" type="java.lang.String">
-            <column name="BOARDNAME" />
+        <property name="topicNum" type="int">
+            <column name="TOPICNUM" />
         </property>
-    </joined-subclass>
+    </class>
 </hibernate-mapping>

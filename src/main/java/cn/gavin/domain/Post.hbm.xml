@@ -1,14 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-5-31 16:01:00 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-9 10:18:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="cn.gavin.domain.Post" extends="cn.gavin.domain.BaseDomain" table="t_POST" lazy="false">
-        <key>
-            <column name="ID" />
-        </key>
-        <property name="boardId" type="int">
+    <class name="cn.gavin.domain.Post" table="t_post">
+        <id name="boardId" type="int">
             <column name="BOARDID" />
+            <generator class="assigned" />
+        </id>
+        <property name="postld" type="int">
+            <column name="POSTLD" />
+        </property>
+        <property name="postTitle" type="java.lang.String">
+            <column name="POSTTITLE" />
         </property>
         <property name="postText" type="java.lang.String">
             <column name="POSTTEXT" />
@@ -16,17 +20,11 @@
         <property name="creatTime" type="java.sql.Date">
             <column name="CREATTIME" />
         </property>
-        <property name="postld" type="int">
-            <column name="POSTLD" />
-        </property>
-        <many-to-one name="topic" class="cn.gavin.domain.Topic" fetch="join">
-            <column name="TOPIC" />
-        </many-to-one>
-        <property name="postTitle" type="java.lang.String">
-            <column name="POSTTITLE" />
-        </property>
         <many-to-one name="user" class="cn.gavin.domain.User" fetch="join">
             <column name="USER" />
         </many-to-one>
-    </joined-subclass>
+        <many-to-one name="topic" class="cn.gavin.domain.Topic" fetch="join">
+            <column name="TOPIC" />
+        </many-to-one>
+    </class>
 </hibernate-mapping>

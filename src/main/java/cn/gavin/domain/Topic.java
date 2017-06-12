@@ -1,4 +1,5 @@
 package cn.gavin.domain;
+import java.io.Serializable;
 /**
  * 
  * @author Gavin
@@ -18,7 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_login_log")
-public class Topic extends BaseDomain{
+public class Topic implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int topicId;
@@ -94,6 +95,12 @@ public class Topic extends BaseDomain{
 	}
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
+	}
+	@Override
+	public String toString() {
+		return "Topic [topicId=" + topicId + ", boardId=" + boardId + ", toplicTitle=" + toplicTitle + ", creatTime="
+				+ creatTime + ", lastPost=" + lastPost + ", views=" + views + ", replies=" + replies + ", digest="
+				+ digest + ", user=" + user + ", topicText=" + topicText + "]";
 	}
 	
 }
