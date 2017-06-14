@@ -82,9 +82,9 @@
 	<bean id="transactionManager"
 			class="org.springframework.orm.hibernate5.HibernateTransactionManager"
 			p:sessionFactory-ref="sessionFactory"/>
-	<!-- 3.使用更强大的切点表达式语言轻松定义目标方法 -->
+	<!-- 3.使用更强大的切点表达式语言轻松定义目标方法
 	
-	<!-- 注解方式配置事物 -->
+	   注解方式配置事物 -->
 	 <tx:annotation-driven transaction-manager="transactionManager" />  
 	
 	<!-- 拦截器方式配置事物    ；  配置事务属性, 需要事务管理器 -->
@@ -114,5 +114,5 @@
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.gavin.service.*.*(..))" />
 		<!-- 引用事物增强 -->
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
-	</aop:config>
+	</aop:config> 
 </beans>

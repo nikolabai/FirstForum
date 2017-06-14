@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +25,7 @@ import cn.gavin.web.RegisterController;
 @RunWith(SpringJUnit4ClassRunner.class)  
 @ContextConfiguration(locations = "classpath:spring.xml")  
 @Transactional  
-@TransactionConfiguration(transactionManager = "transactionManager")  
-public class TestUser {
+public class UserTest extends AbstractJUnit4SpringContextTests{
 	@Resource
 	private UserService userService;
 //	@Autowired    
@@ -40,8 +40,8 @@ public class TestUser {
 	public void saveUser() throws UserExistsException {
 		
 		User u =new User();
-		u.setUserId(3);
 		u.setUserName("jack");
+		u.setPassword("123");
 		userService.register(u);
 		
 	}

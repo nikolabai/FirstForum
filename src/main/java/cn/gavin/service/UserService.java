@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.gavin.dao.LoginLogDao;
 import cn.gavin.dao.UserDao;
@@ -26,6 +28,7 @@ public class UserService {
 	private LoginLogDao loginLogDao;
 	
 	//注册一个新用户，如果用户名已经存在则抛出UserExistException的异常
+	@Transactional
 	public void register(User user)throws UserExistsException{
 		User u = this.getUserByUserName(user.getUserName());
 		if(u!=null){
