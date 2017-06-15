@@ -25,9 +25,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- spring版本号 -->
 		<spring.version>4.3.7.RELEASE</spring.version>
+		<!-- hibernate版本号 -->
 		<hibernate.version>5.2.1.Final</hibernate.version>
 		<!--  <mybatis.version>3.2.6</mybatis.version>  -->
-		<!-- log4j日志文件管理包版本 -->
+		<!-- slf4j+log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.10</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 	</properties>
@@ -162,13 +163,11 @@
 			<version>1.1.1.Final</version>
 		</dependency>
 		<!-- 7.4日志文件管理包 -->
-		<!-- log start -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -179,8 +178,6 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		
-		<!-- log end -->
 		<!-- 7.5 junit测试包 -->
 		<dependency>
 			<groupId>junit</groupId>
