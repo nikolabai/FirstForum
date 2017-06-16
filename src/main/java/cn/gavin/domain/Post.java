@@ -22,7 +22,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * 
+ * 回帖
  * @author Gavin
  *
  */

@@ -1,4 +1,4 @@
-package cn.gavin.commonConstants;
+package cn.gavin.cons;
 /**
  * 
  * @author Gavin

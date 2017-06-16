@@ -15,7 +15,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
-
+/**
+ * 主题帖子
+ * @author Gavin
+ * @2017年6月16日
+ */
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_login_log")
