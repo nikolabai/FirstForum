@@ -2,9 +2,9 @@ package cn.gavin.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +26,7 @@ public class UserDao extends BaseDao<User>{
 		   String hql="from User u where u.userName=:userName";
 		   Query query=getSession().createQuery(hql);  
            query.setParameter("userName",userName);  
-           List userList=query.getResultList();  
+           List userList=query.list();  
            if(userList.size()<1){  
                   return null;  
            }  
@@ -38,7 +38,7 @@ public class UserDao extends BaseDao<User>{
 		String hql="from User u where u.userName=:userName";
 		   Query query=getSession().createQuery(hql);  
         query.setParameter("userName",userName);  
-        List userList=query.getResultList();  
+        List userList=query.list();  
 //        if(userList.size()<1){  
 //               return null;  
 //        }  

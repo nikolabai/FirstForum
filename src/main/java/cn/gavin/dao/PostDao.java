@@ -2,9 +2,9 @@ package cn.gavin.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,7 +30,7 @@ public class PostDao extends BaseDao<Post>{
 			String hql= "from t_post where topicId=:topicId";
 			Query query= getSession().createQuery(hql);
 			query.setParameter("topicId", topicId);
-			List<Post> postlist =query.getResultList();
+			List<Post> postlist =query.list();
 			for (Post post : postlist) {
 				remove(post);
 			}
@@ -38,9 +38,9 @@ public class PostDao extends BaseDao<Post>{
 	}
 	public List<Post> getPagePosts(int topicId, int pageNo, int pageSize) {
 		String hql = "from t_post where topicId=:topicId";
-		Query<Post> query = getSession().createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.setParameter("topicId", topicId);
-		List<Post> postlist =query.getResultList();
+		List<Post> postlist =query.list();
 		return postlist;
 	}
 }
