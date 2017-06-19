@@ -27,11 +27,17 @@ public class LoginLog implements Serializable{
 	private int loginLogId;
 	private String ip;
 	private Date loginDate;
-	private User user;
+	private int userID;
 	
 	
 	
 	
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 	public int getLoginLogId() {
 		return loginLogId;
 	}
@@ -50,15 +56,9 @@ public class LoginLog implements Serializable{
 	public void setLoginDate(Date date) {
 		this.loginDate = date;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	@Override
 	public String toString() {
-		return "LoginLog [loginLogId=" + loginLogId + ", ip=" + ip + ", loginDate=" + loginDate + ", user=" + user
+		return "LoginLog [loginLogId=" + loginLogId + ", ip=" + ip + ", loginDate=" + loginDate + ", user=" + userID
 				+ "]";
 	}
 	

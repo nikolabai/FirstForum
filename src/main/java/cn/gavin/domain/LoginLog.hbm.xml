@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-6-9 10:18:04 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-19 16:29:48 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="cn.gavin.domain.LoginLog" table="t_login_log">
+    <class name="cn.gavin.domain.LoginLog" table="LOGINLOG">
         <id name="loginLogId" type="int">
             <column name="LOGINLOGID" />
             <generator class="assigned" />
@@ -14,8 +14,8 @@
         <property name="loginDate" type="java.util.Date">
             <column name="LOGINDATE" />
         </property>
-        <many-to-one name="user" class="cn.gavin.domain.User" fetch="join">
-            <column name="USER" />
-        </many-to-one>
+        <property name="userID" type="int">
+            <column name="USERID" />
+        </property>
     </class>
 </hibernate-mapping>

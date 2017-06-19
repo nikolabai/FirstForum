@@ -1,4 +1,4 @@
-package cn.gavin.test;
+package cn.gavin.service;
 
 import static org.junit.Assert.*;
 

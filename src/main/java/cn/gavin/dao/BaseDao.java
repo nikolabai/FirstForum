@@ -7,12 +7,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateCallback;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 
 
 /**
@@ -35,7 +33,7 @@ public class BaseDao<T> {
 	//根据ID加载PO实例
 	public T load(Serializable id ) {
 		Session session = sessionFactory.openSession();
-		T entity = session.load(entityClass, id);
+		T entity = (T) session.load(entityClass, id);
 		session.flush();
 		session.close();
 		return entity;
@@ -43,7 +41,7 @@ public class BaseDao<T> {
 	//根据ID获取PO实例
 	public T get(Serializable id) {
 		Session session = sessionFactory.openSession();
-		T entity = session.get(entityClass, id);
+		T entity = (T) session.get(entityClass, id);
 		session.flush();
 		session.close();
 		return entity;
@@ -92,7 +90,7 @@ public class BaseDao<T> {
 	public List find(String hql) {
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery(hql);
-		List list = query.getResultList();
+		List list = query.list();
 		session.close();
 		if (list.isEmpty()) {
 			return  null;
@@ -130,7 +128,7 @@ public class BaseDao<T> {
         List list = session.createQuery(hql)
                         .setFirstResult(pageNo)
                         .setMaxResults(pageSize)
-                        .getResultList();                   
+                        .list();                   
                 return list;
 	}
 //    总记录条数

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-6-9 10:18:04 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-19 16:29:48 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="cn.gavin.domain.Post" table="t_post">
+    <class name="cn.gavin.domain.Post" table="POST">
         <id name="boardId" type="int">
             <column name="BOARDID" />
             <generator class="assigned" />

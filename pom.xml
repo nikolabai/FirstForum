@@ -26,7 +26,7 @@
 		<!-- spring版本号 -->
 		<spring.version>4.3.7.RELEASE</spring.version>
 		<!-- hibernate版本号 -->
-		<hibernate.version>5.2.1.Final</hibernate.version>
+		<hibernate.version>4.2.21.Final</hibernate.version>
 		<!--  <mybatis.version>3.2.6</mybatis.version>  -->
 		<!-- slf4j+log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.10</slf4j.version>
@@ -155,7 +155,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.2.1.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -293,7 +293,14 @@
 		<dependency>
     		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-ehcache</artifactId>
-    		<version>5.2.1.Final</version>
+    		<version>4.2.11.Final</version>
+		</dependency>
+		
+		
+		<dependency>
+    		<groupId>javassist</groupId>
+    		<artifactId>javassist</artifactId>
+    		<version>3.12.1.GA</version>
 		</dependency>
 		
 	</dependencies>

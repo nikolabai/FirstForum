@@ -14,7 +14,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
+/**
+ * 论坛版块
+ * @author Gavin
+ * @2017年6月16日
+ */
 
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

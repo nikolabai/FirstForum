@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.gavin.commonConstants.Constants;
+import cn.gavin.cons.Constants;
 import cn.gavin.domain.User;
 import cn.gavin.service.UserService;
 
@@ -45,7 +45,7 @@ public class LoginController extends BaseController{
 		}else{
 			dbUser.setLastIp(request.getRemoteAddr());
 			dbUser.setLastVisit(new Date());
-			userService.loginSuccess(dbUser);
+//			userService.loginSuccess(dbUser);
 			setSessionUser(request, dbUser);
 			String toUrl = (String) request.getSession().getAttribute(Constants.LOGIN_TO_URL);
 			request.getSession().removeAttribute(Constants.LOGIN_TO_URL);

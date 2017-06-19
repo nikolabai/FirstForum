@@ -15,7 +15,7 @@ import org.hibernate.jpamodelgen.util.StringUtil;
 import org.hibernate.loader.custom.Return;
 import org.springframework.http.HttpRequest;
 
-import cn.gavin.commonConstants.Constants;
+import cn.gavin.cons.Constants;
 import cn.gavin.domain.User;
 
 /**

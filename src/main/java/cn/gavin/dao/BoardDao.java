@@ -1,13 +1,9 @@
 package cn.gavin.dao;
 
-import java.util.Iterator;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-
 import cn.gavin.domain.Board;
 
 /**
@@ -27,11 +23,11 @@ public class BoardDao extends BaseDao<Board>{
 		this.sessionFactory = sessionFactory;
 	}
 	
-	//获取论坛版块数目的方法
-//	public long getBoardNum(){
-//		Session session = sessionFactory.openSession();
+//	获取论坛版块数目的方法
+	public long getBoardNum(){
+		Session session = sessionFactory.openSession();
 //		Iterator iterator =session.iterate(GET_BOARD_NUM );
-//		return ((Long)iterator.next());
-//	}
+		return ((Long)(session.createQuery(GET_BOARD_NUM).iterate().next())).intValue();
+	}
 //	
 }
