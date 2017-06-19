@@ -43,7 +43,7 @@
    <!-- spring log4j监听器 -->  
    <listener>      
        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>      
-   </listener>   -->
+   </listener>   
   <!-- 论坛登陆验证过滤器 -->
   <filter> 
   		<filter-name>forumFilter</filter-name>

@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -27,16 +29,15 @@ public class LoginLog implements Serializable{
 	private int loginLogId;
 	private String ip;
 	private Date loginDate;
-	private int userID;
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
-	
-	
-	
-	public int getUserID() {
-		return userID;
+	public User getUser() {
+		return user;
 	}
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public int getLoginLogId() {
 		return loginLogId;
@@ -58,7 +59,7 @@ public class LoginLog implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "LoginLog [loginLogId=" + loginLogId + ", ip=" + ip + ", loginDate=" + loginDate + ", user=" + userID
+		return "LoginLog [loginLogId=" + loginLogId + ", ip=" + ip + ", loginDate=" + loginDate + ", user=" + user
 				+ "]";
 	}
 	

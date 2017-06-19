@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-6-19 16:29:48 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-19 22:51:00 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="cn.gavin.domain.LoginLog" table="LOGINLOG">
         <id name="loginLogId" type="int">
@@ -14,8 +14,6 @@
         <property name="loginDate" type="java.util.Date">
             <column name="LOGINDATE" />
         </property>
-        <property name="userID" type="int">
-            <column name="USERID" />
-        </property>
+        <one-to-one name="user" class="cn.gavin.domain.User"></one-to-one>
     </class>
 </hibernate-mapping>

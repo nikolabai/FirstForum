@@ -34,7 +34,7 @@ public class ForumService {
 	
 	//1.发表一个主题帖子，用户积分加10，论坛版块的主题帖数加1
 	public void addTopic(Topic topic){
-		Board board = boardDao.get(topic.getBoardId());
+		Board board = boardDao.get(topic.getBoard().getBoardId());
 		board.setTopicNum(board.getTopicNum()+1);
 		topicDao.save(topic);
 		
@@ -64,7 +64,7 @@ public class ForumService {
 		Topic topic = topicDao.get(topicId);
 		
 		//将论坛版块的主题帖数减1
-		Board board = boardDao.get(topic.getBoardId());
+		Board board = boardDao.get(topic.getBoard().getBoardId());
 		board.setTopicNum(board.getTopicNum()-1);
 		//发表该主题帖用户扣除50积分
 		User user=topic.getUser();

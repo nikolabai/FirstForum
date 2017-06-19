@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-6-19 16:29:48 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-6-19 22:51:00 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="cn.gavin.domain.Topic" table="TOPIC">
         <id name="topicId" type="int">
             <column name="TOPICID" />
             <generator class="assigned" />
         </id>
-        <property name="boardId" type="int">
-            <column name="BOARDID" />
-        </property>
+        <many-to-one name="board" class="cn.gavin.domain.Board" fetch="join">
+            <column name="BOARD" />
+        </many-to-one>
         <property name="toplicTitle" type="java.lang.String">
             <column name="TOPLICTITLE" />
         </property>

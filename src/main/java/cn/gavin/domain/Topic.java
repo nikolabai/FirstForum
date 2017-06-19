@@ -10,6 +10,9 @@ import java.util.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -22,24 +25,34 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Table(name = "t_login_log")
+@Table(name = "t_topic")
 public class Topic implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int topicId;
-	private int boardId;
+	@ManyToOne
+	@JoinColumn(name="board_id")
+	private Board board;
 	private String toplicTitle;
 	private Date creatTime;
 	private Date lastPost;
 	private int views;
 	private int replies;
 	private int digest;
+	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
 	//addbygavin
 	private String topicText;
 	
 	
 	
+	public Board getBoard() {
+		return board;
+	}
+	public void setBoard(Board board) {
+		this.board = board;
+	}
 	public int getTopicId() {
 		return topicId;
 	}
@@ -94,15 +107,10 @@ public class Topic implements Serializable{
 	public void setTopicText(String topicText) {
 		this.topicText = topicText;
 	}
-	public int getBoardId() {
-		return boardId;
-	}
-	public void setBoardId(int boardId) {
-		this.boardId = boardId;
-	}
+	
 	@Override
 	public String toString() {
-		return "Topic [topicId=" + topicId + ", boardId=" + boardId + ", toplicTitle=" + toplicTitle + ", creatTime="
+		return "Topic [topicId=" + topicId + ", board=" + board + ", toplicTitle=" + toplicTitle + ", creatTime="
 				+ creatTime + ", lastPost=" + lastPost + ", views=" + views + ", replies=" + replies + ", digest="
 				+ digest + ", user=" + user + ", topicText=" + topicText + "]";
 	}
