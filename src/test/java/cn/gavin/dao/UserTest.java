@@ -24,8 +24,13 @@ public class UserTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao ud=(UserDao) context.getBean("userDao");
 		User u =new User();
+<<<<<<< HEAD
 		u.setUserId(1);
 		u.setUserName("tom");
+=======
+		u.setUserId(4);
+		u.setUserName("nikola");
+>>>>>>> branch 'master' of https://github.com/nikolabai/FirstForum.git
 		u.setPassword("123");
 		ud.save(u);
 		

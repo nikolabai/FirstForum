@@ -40,7 +40,8 @@ public class DaoTest extends AbstractJUnit4SpringContextTests{
 	public void saveUser() throws UserExistsException {
 		
 		User u =new User();
-		u.setUserName("jack");
+		u.setUserId(2);
+		u.setUserName("gavin");
 		u.setPassword("123");
 		userService.register(u);
 		

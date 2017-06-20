@@ -19,7 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Table(name = "t_login_log")
+@Table(name = "t_user")
 public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
