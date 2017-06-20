@@ -1,6 +1,6 @@
 简单论坛项目
 技术：
-spring 4.1.5
+spring 4.1.6
 hibernate4.3.11
 springMVC
 Mysql5.6
