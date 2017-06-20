@@ -24,7 +24,8 @@ public class UserTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao ud=(UserDao) context.getBean("userDao");
 		User u =new User();
-		u.setUserName("jack");
+		u.setUserId(1);
+		u.setUserName("tom");
 		u.setPassword("123");
 		ud.save(u);
 		
