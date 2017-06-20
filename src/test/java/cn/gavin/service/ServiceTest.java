@@ -18,7 +18,7 @@ public class ServiceTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
-
+	//done
 	@Test
 	public void testRegister() throws UserExistsException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");

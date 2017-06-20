@@ -16,7 +16,7 @@ public class DaoTest extends TestCase{
 	public static void setUpBeforeClass() throws Exception {
 		System.out.println("开始");
 	}
-
+	//Done
 	@Test
 	public void testSave() throws UserExistsException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
@@ -38,7 +38,7 @@ public class DaoTest extends TestCase{
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao ud=(UserDao) context.getBean("userDao");
 		User u =ud.get(1);
-		u.setPassword("12");
+		u.setPassword("1234567");
 		ud.update(u);
 	}
 	@Test
