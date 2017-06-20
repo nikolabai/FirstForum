@@ -20,14 +20,20 @@ public class ServiceTest {
 	}
 
 	@Test
-	public void test() throws UserExistsException {
+	public void testRegister() throws UserExistsException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserService us=(UserService) context.getBean("userService");
 		User u =new User();
-		u.setUserName("jack");
-		u.setPassword("123");
+		u.setUserId(7);
+		u.setUserName("selary");
+		u.setPassword("1");
 		us.register(u);
-		
+	}
+	@Test
+	public void testGetUserById(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserService us=(UserService) context.getBean("userService");
+		System.out.println(us.getUserById(1));
 	}
 
 }

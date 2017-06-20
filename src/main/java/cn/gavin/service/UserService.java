@@ -41,10 +41,12 @@ public class UserService {
 		}
 	}
 	//根据用户名密码查询User对象
+	@Transactional
 	public User getUserByUserName(String userName) {
 		return userDao.getUserByUserName(userName);
 	}
 	//根据用户id加载User对象
+	@Transactional
 	public User getUserById(int userId){
 		return userDao.get(userId);
 	}

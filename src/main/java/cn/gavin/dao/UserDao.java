@@ -7,21 +7,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.gavin.domain.User;
 @Repository
+@Transactional
 public class UserDao extends BaseDao<User>{
 	@Autowired
 	private SessionFactory sessionFactory;  
 	public void setSessionFactory(SessionFactory sessionFactory) {   
 		this.sessionFactory = sessionFactory;   
 	}     
-	protected Session getSession() {    
+	public Session getSession() {    
 		return sessionFactory.getCurrentSession();   
 	}  
 	
 	
-	
+	@Transactional
 	public User getUserByUserName(String userName) {
 		   String hql="from User u where u.userName=:userName";
 		   Query query=getSession().createQuery(hql);  

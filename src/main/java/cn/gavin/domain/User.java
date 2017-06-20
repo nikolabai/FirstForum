@@ -31,9 +31,6 @@ public class User implements Serializable{
 	private int credit;
 	private Date lastVisit;
 	private String lastIp;
-//	private List<Board> manBoard;
-	
-	
 	
 	public int getUserId() {
 		return userId;

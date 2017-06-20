@@ -1,51 +1,58 @@
 package cn.gavin.dao;
 
-import static org.junit.Assert.*;
-
-import javax.annotation.Resource;
-
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.omg.CORBA.PRIVATE_MEMBER;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.gavin.domain.User;
 import cn.gavin.exception.UserExistsException;
-import cn.gavin.service.UserService;
-import cn.gavin.web.RegisterController;
+import junit.framework.TestCase;
 
-@RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration(locations = "classpath:spring.xml")  
-@Transactional  
-public class DaoTest extends AbstractJUnit4SpringContextTests{
-	@Resource
-	private UserService userService;
-//	@Autowired    
-//	private ApplicationContext appplicationContext; //自动注入applicationContext，这样就可以使用appli*.getBean("beanName")    
+public class DaoTest extends TestCase{
+	
 
-	
-	
-	    
-    @Transactional  //使用该注释会使用事务，而且在测试完成之后会回滚事务，也就是说在该方法中做出的一切操作都不会对数据库中的数据产生任何影响    
-    @Rollback(false) //这里设置为false，就让事务不回滚
-	@Test 
-	public void saveUser() throws UserExistsException {
-		
-		User u =new User();
-		u.setUserId(2);
-		u.setUserName("gavin");
-		u.setPassword("123");
-		userService.register(u);
-		
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		System.out.println("开始");
 	}
-	
 
+	@Test
+	public void testSave() throws UserExistsException {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		User u =new User();
+		u.setUserId(9);
+		u.setUserName("du");
+		u.setPassword("12345");
+		ud.save(u);
+	}
+	@Test
+	public User testGetUserByUserName(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		return ud.getUserByUserName("tom");
+	}
+	@Test
+	public void testUpdate()  {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		User u =ud.get(1);
+		u.setPassword("12");
+		ud.update(u);
+	}
+	@Test
+	public void testRemove() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		User u =new User();
+		u.setUserId(5);
+		ud.remove(u);
+	}
+	@Test
+	public User load() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		return ud.load(1);
+	}
 }

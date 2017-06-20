@@ -22,17 +22,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 //DAO基类，其他DAO可以直接继承这个DAO，不但可以复用共用的方法，还可以获得泛型的好处
 public class BaseDao<T> {
 	private Class<T> entityClass;
+	//what??
+	@SuppressWarnings("unchecked")
+	public BaseDao() {  
+        Type type = getClass().getGenericSuperclass();  
+        if (type instanceof ParameterizedType) {  
+            this.entityClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];  
+        } else {  
+            this.entityClass = null;  
+        }  
+    }  
 	@Autowired
 	private SessionFactory sessionFactory;
+//	public Session getSession(){
+//		return sessionFactory.getCurrentSession();
+//	}
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	
+	
 	//根据ID加载PO实例
 	public T load(Serializable id ) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		T entity = (T) session.load(entityClass, id);
 		session.flush();
 		session.close();
@@ -40,34 +56,25 @@ public class BaseDao<T> {
 	}
 	//根据ID获取PO实例
 	public T get(Serializable id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		T entity = (T) session.get(entityClass, id);
 		session.flush();
 		session.close();
 		return entity;
 	}
-	//获取po的所有对象
-//	public T loadAll() {
-//		Session session = sessionFactory.openSession();
-//		T entity = session.loadAll(entityClass);
-//		session.flush();
-//		session.close();
-//		return entity;
-//	}
 	//保存po
 	public void save (T entity ) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.save(entity);
 		session.flush();
 		session.close();
-		
 	}
 	/**
 	 * 删除po
 	 * @param entity
 	 */
 	public void remove (T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.delete(entity);
 		session.flush();
 		session.close();
@@ -77,7 +84,7 @@ public class BaseDao<T> {
 	 * @param entity
 	 */
 	public void update (T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.update(entity);
 		session.flush();
 		session.close();
@@ -88,7 +95,7 @@ public class BaseDao<T> {
 	 * @return
 	 */
 	public List find(String hql) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(hql);
 		List list = query.list();
 		session.close();
@@ -123,7 +130,7 @@ public class BaseDao<T> {
 	/*********************************HQL*************************************/
 	//分页查询
 	public List<?> queryForPage(String hql,int pageNo,int pageSize) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(hql);
         List list = session.createQuery(hql)
                         .setFirstResult(pageNo)
@@ -133,7 +140,7 @@ public class BaseDao<T> {
 	}
 //    总记录条数
 	public int getCount(String hql) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(hql);
 		int count = ((Long) query.iterate().next()).intValue();
 		return count; 
