@@ -254,11 +254,11 @@
 		</dependency>
 		<dependency>
 		<!-- 7.11connect pool with c3p0 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
-		</dependency>
+		</dependency> -->
 		<!--  -->
     		<groupId>commons-beanutils</groupId>
     		<artifactId>commons-beanutils</artifactId>
