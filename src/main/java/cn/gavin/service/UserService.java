@@ -66,12 +66,12 @@ public class UserService {
 	}
 	
 	//登陆成功,用户积分加5，并记录日志
-//	public void loginSuccess(User user){
-//		user.setCredit(5+user.getCredit());
-//		LoginLog loginLog = new LoginLog();
-//		loginLog.setUser(user);
-//		loginLog.setIp(user.getLastIp());
-//		loginLog.setLoginDate(new Date());
-//		
-//	}
+	public void loginSuccess(User user){
+		user.setCredit(5+user.getCredit());
+		LoginLog loginLog = new LoginLog();
+		loginLog.setUser(user);
+		loginLog.setIp(user.getLastIp());
+		loginLog.setLoginDate(new Date());
+		
+	}
 }
