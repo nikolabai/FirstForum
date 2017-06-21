@@ -4,12 +4,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.gavin.domain.User;
 import cn.gavin.exception.UserExistsException;
 import junit.framework.TestCase;
 
-public class DaoTest extends TestCase{
+public class UsrDaoTest extends TestCase{
 	
 
 	@BeforeClass
@@ -23,36 +24,61 @@ public class DaoTest extends TestCase{
 		UserDao ud=(UserDao) context.getBean("userDao");
 		User u =new User();
 		u.setUserId(9);
-		u.setUserName("du");
+		u.setUserName("tom");
 		u.setPassword("12345");
 		ud.save(u);
 	}
 	@Test
-	public User testGetUserByUserName(){
+	public void testLoad() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao ud=(UserDao) context.getBean("userDao");
-		return ud.getUserByUserName("tom");
+		System.out.println(ud.load(1)); 
+	}
+	@Test
+	public void testGet() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		System.out.println(ud.load(1)); 
+	}
+	@Test
+	public void testRemove() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		ud.remove(ud.load(10));
+	}
+	@Test
+	public void testGetUserByUserName(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		System.out.println(ud.getUserByUserName("tom"));
+	}
+	@Test
+	public void testQueryUserByUserName(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserDao ud=(UserDao) context.getBean("userDao");
+		System.out.println(ud.queryUserByUserName("tom"));
 	}
 	@Test
 	public void testUpdate()  {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao ud=(UserDao) context.getBean("userDao");
 		User u =ud.get(1);
-		u.setPassword("1234567");
+		u.setPassword("12");
 		ud.update(u);
 	}
 	@Test
-	public void testRemove() {
+	public void testFind()  {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao ud=(UserDao) context.getBean("userDao");
-		User u =new User();
-		u.setUserId(5);
-		ud.remove(u);
+		String aString = "from User u where u.password=12345";
+		System.out.println(ud.find(aString));
 	}
 	@Test
-	public User load() {
+	public void testGetCount()  {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao ud=(UserDao) context.getBean("userDao");
-		return ud.load(1);
+		String aString = "select count(*)  from User";
+		System.out.println(ud.getCount(aString));
 	}
+	
 }

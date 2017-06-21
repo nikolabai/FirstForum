@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.gavin.domain.User;
 @Repository
-@Transactional
 public class UserDao extends BaseDao<User>{
 	@Autowired
 	private SessionFactory sessionFactory;  
@@ -23,28 +22,23 @@ public class UserDao extends BaseDao<User>{
 	}  
 	
 	
-	@Transactional
 	public User getUserByUserName(String userName) {
-		   String hql="from User u where u.userName=:userName";
-		   Query query=getSession().createQuery(hql);  
-           query.setParameter("userName",userName);  
-           List userList=query.list();  
-           if(userList.size()<1){  
-                  return null;  
-           }  
-           User user=(User)userList.get(0);  
-           return user;  
+	   String hql="from User u where u.userName=:userName";
+	   Query query=getSession().createQuery(hql);  
+       query.setParameter("userName",userName);  
+       List userList=query.list();  
+       if(userList.size()<1){  
+              return null;  
+       }  
+       User user=(User)userList.get(0);  
+       return user;  
           
 	}
 	public List<User> queryUserByUserName(String userName) {
 		String hql="from User u where u.userName=:userName";
-		   Query query=getSession().createQuery(hql);  
+		Query query=getSession().createQuery(hql);  
         query.setParameter("userName",userName);  
         List userList=query.list();  
-//        if(userList.size()<1){  
-//               return null;  
-//        }  
-//        User user=(User)userList.get(0);  
         return userList;  
 	}
 

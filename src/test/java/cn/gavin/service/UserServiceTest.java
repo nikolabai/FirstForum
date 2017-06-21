@@ -12,7 +12,7 @@ import cn.gavin.domain.User;
 import cn.gavin.exception.UserExistsException;
 import cn.gavin.service.UserService;
 
-public class ServiceTest {
+public class UserServiceTest {
 	
 
 	@BeforeClass
@@ -24,8 +24,8 @@ public class ServiceTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserService us=(UserService) context.getBean("userService");
 		User u =new User();
-		u.setUserId(7);
-		u.setUserName("selary");
+		u.setUserId(10);
+		u.setUserName("matin");
 		u.setPassword("1");
 		us.register(u);
 	}

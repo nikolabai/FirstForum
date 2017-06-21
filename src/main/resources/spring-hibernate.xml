@@ -17,7 +17,7 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 	
-	<!-- *********************************************************************************** -->
+	<!-- *************************************扫描********************************************** -->
 	<!-- 1.配置自动扫描的包 -->
 	<!-- 扫描dao包下@repository的组件 -->
 	<context:component-scan base-package="cn.gavin.dao"></context:component-scan>
@@ -25,6 +25,7 @@
 	<context:component-scan base-package="cn.gavin.service"></context:component-scan>
 	<!-- 扫描cn.gavin.domain包下所有标注@Entity的服务组件 -->
 	<context:component-scan base-package="cn.gavin.domain"></context:component-scan>
+	
 	
 	<!-- ************************数据源配置*********************************************** -->
 	<!-- 引入属性文件 -->
@@ -48,6 +49,11 @@
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<!-- 用于解决懒加载时找不到session的问题 -->  
+                <!-- 关闭Load方法的延迟加载 ?-->
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+                </prop>
 				<!-- 使用EHcache缓存实现方案 -->
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
 				<!-- 启用hibernate二级缓存 -->
@@ -64,11 +70,11 @@
 				value="classpath:cn/gavin/domain/*.hbm.xml"></property>
 
 		<!--3.自动扫描注解方式配置的hibernate类文件(扫描基于JPA注解PO类目录 -->
-		<!-- <property name="packagesToScan">
+		<property name="packagesToScan">
 			<list>
 				<value>cn.gavin.domain</value>
 			</list>
-		</property>  -->
+		</property>
 	</bean>
 	<!-- ************************************二级缓存********************************************** -->
 	<!-- 基于EHcache的系统缓存管理器 -->
@@ -85,10 +91,10 @@
 	<!-- 3.使用更强大的切点表达式语言轻松定义目标方法 -->
 	
 	<!-- 注解方式配置事物 -->
-	<!--  <tx:annotation-driven transaction-manager="transactionManager" />  --> 
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" /> 
 	
 	<!-- 拦截器方式配置事物    ；  配置事务属性, 需要事务管理器 -->
-	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+	<!-- <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="add*" />
 			<tx:method name="save*" />
@@ -106,13 +112,13 @@
 			<tx:method name="datagrid*" propagation="SUPPORTS" />
 			<tx:method name="*" propagation="SUPPORTS" />
 		</tx:attributes>
-	</tx:advice>
+	</tx:advice> -->
 	
 	<!-- 使用强大的切点表达式语言轻松定义目标方法 ；配置事务切点, 并把切点和事务属性关联起来-->
-	<aop:config>
-		<!-- 通过AOP定义事物增强切面 -->
-		<aop:pointcut id="transactionPointcut" expression="execution(* com.gavin.service.*.*(..))" />
-		<!-- 引用事物增强 -->
+	<!-- <aop:config>
+		通过AOP定义事物增强切面
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.gavin.*.*.*(..))" />
+		引用事物增强
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
-	</aop:config>
+	</aop:config> -->
 </beans>
