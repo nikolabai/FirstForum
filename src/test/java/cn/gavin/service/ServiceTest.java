@@ -29,5 +29,13 @@ public class ServiceTest {
 		us.register(u);
 		
 	}
+	@Test
+	public void testGetUserByUserName() throws UserExistsException {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		UserService us=(UserService) context.getBean("userService");
+		
+		us.getUserByUserName("nikola");
+		
+	}
 
 }

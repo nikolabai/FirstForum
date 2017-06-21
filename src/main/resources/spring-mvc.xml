@@ -23,7 +23,10 @@
     
     
 	<!-- 自动扫描cn.gavin.web包下的@Controller标注的类控制器 -->
-	<context:component-scan base-package="cn.gavin.web"/>
+	<!-- <context:component-scan base-package="cn.gavin.web"/> -->
+	<context:component-scan base-package="cn.gavin.web" >      
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />    
+	</context:component-scan> 
 	
 	
 	

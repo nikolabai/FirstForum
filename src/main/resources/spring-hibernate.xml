@@ -25,6 +25,7 @@
 	<context:component-scan base-package="cn.gavin.service"></context:component-scan>
 	<!-- 扫描cn.gavin.domain包下所有标注@Entity的服务组件 -->
 	<context:component-scan base-package="cn.gavin.domain"></context:component-scan>
+	<context:component-scan base-package="cn.gavin.web"/>
 	
 	<!-- ************************数据源配置*********************************************** -->
 	<!-- 引入属性文件 -->
@@ -57,8 +58,13 @@
 				<!-- 配置二级缓存实现类-->
 				<!-- <prop key="hibernate.cache.region.factory_class">true</prop> -->
 				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<prop key="hibernate.current_session_context_class">
+                        org.springframework.orm.hibernate4.SpringSessionContext
+                    </prop>
 			</props>
 		</property>
+		
+		<!-- <property name="current_session_context_class">thread</property> -->
 		<!-- 2.配置 hibernate 映射文件的位置及名称, 可以使用通配符 -->
 		<property name="mappingLocations" 
 				value="classpath:cn/gavin/domain/*.hbm.xml"></property>
@@ -88,7 +94,7 @@
 	 <tx:annotation-driven transaction-manager="transactionManager" />  
 	
 	<!-- 拦截器方式配置事物    ；  配置事务属性, 需要事务管理器 -->
-	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+	<!-- <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="add*" />
 			<tx:method name="save*" />
@@ -106,13 +112,13 @@
 			<tx:method name="datagrid*" propagation="SUPPORTS" />
 			<tx:method name="*" propagation="SUPPORTS" />
 		</tx:attributes>
-	</tx:advice>
+	</tx:advice> -->
 	
 	<!-- 使用强大的切点表达式语言轻松定义目标方法 ；配置事务切点, 并把切点和事务属性关联起来-->
-	<aop:config>
-		<!-- 通过AOP定义事物增强切面 -->
+	<!-- <aop:config>
+		通过AOP定义事物增强切面
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.gavin.service.*.*(..))" />
-		<!-- 引用事物增强 -->
+		引用事物增强
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
-	</aop:config>
+	</aop:config> -->
 </beans>

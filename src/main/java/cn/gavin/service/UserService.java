@@ -41,6 +41,7 @@ public class UserService {
 		}
 	}
 	//根据用户名密码查询User对象
+	@Transactional
 	public User getUserByUserName(String userName) {
 		return userDao.getUserByUserName(userName);
 	}

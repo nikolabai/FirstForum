@@ -22,6 +22,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 //DAO基类，其他DAO可以直接继承这个DAO，不但可以复用共用的方法，还可以获得泛型的好处
 public class BaseDao<T> {
 	private Class<T> entityClass;
+	
+	
+	//通过反射获得子类确定的泛型类
+	public BaseDao(){
+		Type genType= getClass().getGenericSuperclass();
+		Type[] params =((ParameterizedType)genType).getActualTypeArguments();
+		entityClass = (Class<T>) params[0];
+	}
 	@Autowired
 	private SessionFactory sessionFactory;
 	public SessionFactory getSessionFactory() {
@@ -32,10 +40,8 @@ public class BaseDao<T> {
 	}
 	//根据ID加载PO实例
 	public T load(Serializable id ) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		T entity = (T) session.load(entityClass, id);
-		session.flush();
-		session.close();
 		return entity;
 	}
 	//根据ID获取PO实例
