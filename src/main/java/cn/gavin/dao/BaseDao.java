@@ -11,6 +11,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -22,82 +23,79 @@ import org.springframework.beans.factory.annotation.Autowired;
 //DAO基类，其他DAO可以直接继承这个DAO，不但可以复用共用的方法，还可以获得泛型的好处
 public class BaseDao<T> {
 	private Class<T> entityClass;
-	
-	
-	//通过反射获得子类确定的泛型类
-	public BaseDao(){
-		Type genType= getClass().getGenericSuperclass();
-		Type[] params =((ParameterizedType)genType).getActualTypeArguments();
-		entityClass = (Class<T>) params[0];
-	}
+	//反射
+	@SuppressWarnings("unchecked")
+	public BaseDao() {  
+        Type type = getClass().getGenericSuperclass();  
+        if (type instanceof ParameterizedType) {  
+            this.entityClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];  
+        } else {  
+            this.entityClass = null;  
+        }  
+    }  
 	@Autowired
 	private SessionFactory sessionFactory;
+	public Session getSession(){
+		return sessionFactory.getCurrentSession();
+	}
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	
+	
 	//根据ID加载PO实例
 	public T load(Serializable id ) {
 		Session session = sessionFactory.getCurrentSession();
 		T entity = (T) session.load(entityClass, id);
+//		session.flush();
+//		session.close();
 		return entity;
 	}
 	//根据ID获取PO实例
+	@Transactional
 	public T get(Serializable id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		T entity = (T) session.get(entityClass, id);
-		session.flush();
-		session.close();
 		return entity;
 	}
-	//获取po的所有对象
-//	public T loadAll() {
-//		Session session = sessionFactory.openSession();
-//		T entity = session.loadAll(entityClass);
-//		session.flush();
-//		session.close();
-//		return entity;
-//	}
 	//保存po
+	@Transactional
 	public void save (T entity ) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.save(entity);
-		session.flush();
-		session.close();
-		
 	}
 	/**
 	 * 删除po
 	 * @param entity
 	 */
+	@Transactional
 	public void remove (T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.delete(entity);
-		session.flush();
-		session.close();
 	}
 	/**
 	 * 更新po
 	 * @param entity
 	 */
+	@Transactional
 	public void update (T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		session.update(entity);
-		session.flush();
-		session.close();
 	}
 	/**
 	 * 执行HQL查询
 	 * @param hql
 	 * @return
 	 */
+	@Transactional
 	public List find(String hql) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(hql);
 		List list = query.list();
-		session.close();
 		if (list.isEmpty()) {
 			return  null;
 		}
@@ -129,7 +127,7 @@ public class BaseDao<T> {
 	/*********************************HQL*************************************/
 	//分页查询
 	public List<?> queryForPage(String hql,int pageNo,int pageSize) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(hql);
         List list = session.createQuery(hql)
                         .setFirstResult(pageNo)
@@ -137,14 +135,15 @@ public class BaseDao<T> {
                         .list();                   
                 return list;
 	}
-//    总记录条数
+    //总记录条数
+	@Transactional
 	public int getCount(String hql) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(hql);
-		int count = ((Long) query.iterate().next()).intValue();
+		int count = ( (Long) query.iterate().next()).intValue();
 		return count; 
 	}
-				 
+				
 		
 	
 }

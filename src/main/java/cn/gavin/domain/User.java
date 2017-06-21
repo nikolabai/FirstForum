@@ -31,9 +31,6 @@ public class User implements Serializable{
 	private int credit;
 	private Date lastVisit;
 	private String lastIp;
-//	private List<Board> manBoard;
-	
-	
 	
 	public int getUserId() {
 		return userId;
@@ -83,12 +80,6 @@ public class User implements Serializable{
 	public void setLastIp(String lastIp) {
 		this.lastIp = lastIp;
 	}
-//	public List<Board> getManBoard() {
-//		return manBoard;
-//	}
-//	public void setManBoard(List<Board> manBoard) {
-//		this.manBoard = manBoard;
-//	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", userType=" + userType

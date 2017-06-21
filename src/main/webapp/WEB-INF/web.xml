@@ -24,7 +24,7 @@
   <!-- Spring的OpenSessionInView实现 此监听器应该在struts2的监听器前面 ,(解决延时加载问题)-->
   <filter>
   		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
-  		<filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter </filter-class>
+  		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter </filter-class>
   </filter>
   <filter-mapping>
   		<filter-name>hibernateOpenSessionInViewFilter</filter-name>

@@ -22,7 +22,7 @@ public class PostDao extends BaseDao<Post>{
 	public void setSessionFactory(SessionFactory sessionFactory) {   
 		this.sessionFactory = sessionFactory;   
 	}     
-	protected Session getSession() {    
+	public Session getSession() {    
 		return sessionFactory.getCurrentSession();   
 	}  
 

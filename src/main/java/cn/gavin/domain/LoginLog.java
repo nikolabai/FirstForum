@@ -1,13 +1,7 @@
 package cn.gavin.domain;
-/**
- * 
- * @author Gavin
- * @2017年3月27日
- */
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +12,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+/**
+ * 
+ * @author Gavin   登陆日志
+ * @2017年3月27日
+ */
 @javax.persistence.Entity
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_login_log")

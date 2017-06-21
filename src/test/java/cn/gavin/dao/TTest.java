@@ -25,7 +25,7 @@ import cn.gavin.web.RegisterController;
 @RunWith(SpringJUnit4ClassRunner.class)  
 @ContextConfiguration(locations = "classpath:spring.xml")  
 @Transactional  
-public class DaoTest extends AbstractJUnit4SpringContextTests{
+public class TTest extends AbstractJUnit4SpringContextTests{
 	@Resource
 	private UserService userService;
 //	@Autowired    

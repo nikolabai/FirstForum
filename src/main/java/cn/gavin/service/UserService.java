@@ -46,6 +46,7 @@ public class UserService {
 		return userDao.getUserByUserName(userName);
 	}
 	//根据用户id加载User对象
+	@Transactional
 	public User getUserById(int userId){
 		return userDao.get(userId);
 	}
