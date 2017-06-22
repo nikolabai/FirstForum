@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,12 +39,12 @@ public class UserServiceTest {
 		System.out.println("开始测试");
 	}
 	//done
-//	@Rollback(false) //这里设置为false，就让事务不回滚
+	@Rollback(false) //这里设置为false，就让事务不回滚
 	@Test
 	public void testRegister() throws UserExistsException {
 		User u =new User();
-		u.setUserId(12);
-		u.setUserName("ma");
+		u.setUserId(14);
+		u.setUserName("mhe");
 		u.setPassword("1");
 		userService.register(u);
 	}
