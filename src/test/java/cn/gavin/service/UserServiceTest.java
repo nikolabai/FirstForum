@@ -52,29 +52,29 @@ public class UserServiceTest {
 		System.out.println(userService.getUserById(1));
 	}
 	@Test
-	public void testGetUserByUserName(String userName) {
-		System.out.println(userService.getUserByUserName("ni"));
+	public void testGetUserByUserName() {
+		System.out.println(userService.getUserByUserName("tom"));
 	}
 	//将用户锁定，锁定的用户不能够登陆
 	@Test
-	public void testLockUser(String userName){
-		userService.lockUser("ni");
+	public void testLockUser(){
+		userService.lockUser("tom");
 	}
 	//接触用户锁定
 	@Test
-	public void testUnlockUser(String userName){
-		userService.unlockUser("ni");
+	public void testUnlockUser(){
+		userService.unlockUser("tom");
 	}
 	//根据用户名为条件，执行模糊查询操作
 	@Test
-	public void testQueryUserByUserName(String userName){
+	public void testQueryUserByUserName(){
 		
-		System.out.println(userService.queryUserByUserName("ni"));
+		System.out.println(userService.queryUserByUserName("tom"));
 	}
 	
 	//登陆成功,用户积分加5，并记录日志
 	@Test
-	public void testLoginSuccess(User user){
+	public void testLoginSuccess(){
 		User u =userService.getUserById(1);
 		userService.loginSuccess(u);
 	}
