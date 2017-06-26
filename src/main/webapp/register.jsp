@@ -18,7 +18,7 @@
 </head>
 <body>
 用户注册信息：
-<form action="<c:url value="/register.html"/>"  method="post" onsubmit="return mycheck()">
+<form action="register" method="post" onsubmit="return mycheck()">
 <c:if test="${!empty errorMsg }">
 	<div style="color=red">${errorMsg }</div>
 </c:if>
@@ -37,11 +37,9 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type = "submit" value = "保存"><input type ="reset" value ="重置">
+			<input type = "submit" value = "注册"><input type ="reset" value ="重置">
 		</td>
 	</tr>
-		
-		
 </table>
 </form>
 </body>

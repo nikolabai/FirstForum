@@ -36,22 +36,8 @@ public class ForumService {
 	public void addTopic(Topic topic){
 		Board board = boardDao.get(topic.getBoard().getBoardId());
 		board.setTopicNum(board.getTopicNum()+1);
+		
 		topicDao.save(topic);
-		
-		//创建主题帖
-//		topic.getMainPost().setTopic(topic);
-//		MainPost post = topic.getMainPost();
-//		post.setCreateTime(new Date());
-//		post.setUser(topic.getUser());
-//		post.setPostTitle(topic.getToplicTitle());
-//		post.setBoardId(topic.getBoardId());
-//		//持久化主题帖
-//		postDao.save(topic.getMainPost());
-//		//更新用户积分
-//		User user =topic.getUser();
-//		user.setCredit(user.getCredit()+10);
-//		userDao.update(user);
-		
 		//更新用户积分+10
 		User user =topic.getUser();
 		user.setCredit(user.getCredit()+10);

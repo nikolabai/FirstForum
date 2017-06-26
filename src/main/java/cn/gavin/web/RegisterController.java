@@ -2,6 +2,8 @@ package cn.gavin.web;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,21 +23,22 @@ import cn.gavin.service.UserService;
 public class RegisterController extends BaseController{
 	@Autowired
 	private UserService userService;
-	
-	//用户登陆
+	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
+	//用户注册
 	@RequestMapping(value="/register",method=RequestMethod.POST)
 	public ModelAndView register(HttpServletRequest request,User user){
+		logger.info("调用controller");
 		ModelAndView view =new ModelAndView();
 		try {
 			userService.register(user);
 		} catch (UserExistsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			view.addObject("errorMsg","用户名已经岑在，请选择其他的名字。");
+			view.addObject("errorMsg","用户名已经存在，请选择其他的名字。");
 			view.setViewName("forward:/register.jsp");
 		}
 		setSessionUser(request, user);
-		return view;
+		return new ModelAndView("success");
 		
 	}
 	

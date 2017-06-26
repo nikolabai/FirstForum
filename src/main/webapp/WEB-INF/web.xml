@@ -89,12 +89,12 @@
             <param-name>contextConfigLocation</param-name>  <!--参数名称-->  
             <param-value>classpath*:/spring-mvc.xml</param-value> <!--参数值-->  
         </init-param> 
-		<load-on-startup>3</load-on-startup>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<!-- 将html为后缀的url由helloservlet Servlet处理 -->
+	<!-- 将html为后缀的url由SpringMVC Servlet处理 -->
 	<servlet-mapping>
 		<servlet-name>SpringMVC</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	
 	
@@ -110,7 +110,6 @@
   
   	<!-- 显示时按顺序从第一个找起，如果第一个存在，就显示第一个，后面的不起作用。如果第一个不存在，就找第二个，以此类推 -->
 	  <welcome-file-list>
-	  	<welcome-file>register.jsp</welcome-file>
 	  	
 	    <welcome-file>index.html</welcome-file>
 	    <welcome-file>index.htm</welcome-file>
