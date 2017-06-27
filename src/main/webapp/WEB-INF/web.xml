@@ -94,7 +94,8 @@
 	<!-- 将html为后缀的url由SpringMVC Servlet处理 -->
 	<servlet-mapping>
 		<servlet-name>SpringMVC</servlet-name>
-		<url-pattern>/*</url-pattern>
+		 <!-- 不可以用 /* 来代替所有的路径,这里拦截的是所有的路径，  故意的，一般不要这样写，而是要加上一些限制 --> 
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
 	
@@ -111,6 +112,7 @@
   	<!-- 显示时按顺序从第一个找起，如果第一个存在，就显示第一个，后面的不起作用。如果第一个不存在，就找第二个，以此类推 -->
 	  <welcome-file-list>
 	  	<welcome-file>register.jsp</welcome-file>
+	  	
 	    <welcome-file>index.html</welcome-file>
 	    <welcome-file>index.htm</welcome-file>
 	    <welcome-file>index.jsp</welcome-file>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.gavin.domain.User;
@@ -25,9 +26,11 @@ public class RegisterController extends BaseController{
 	private UserService userService;
 	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
 	//用户注册
-	@RequestMapping(value="/register",method=RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request,User user){
+	@RequestMapping(value="/register")
+	public ModelAndView register(HttpServletRequest request, User user){
+//	public ModelAndView register(@RequestParam("userName") String userName, @RequestParam("password") String password){
 		logger.info("调用controller");
+		System.out.println(user);
 		ModelAndView view =new ModelAndView();
 		try {
 			userService.register(user);
@@ -41,6 +44,9 @@ public class RegisterController extends BaseController{
 		return new ModelAndView("success");
 		
 	}
-	
+	@RequestMapping(value="/index",method=RequestMethod.GET) 
+	public String index(){ 
+	return "register"; 
+	}
 
 }

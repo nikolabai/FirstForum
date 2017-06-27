@@ -4,24 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>用户注册</title>
-<script>
-	function mycheck(){
-		if(document.all("user.password").value!=document.al("again").value){
-			alert("两次输入的密码不正确，请更正。");
-			return false;
-		}else{
-			return true;
-		}
-	}
-</script>		
+<title>欢迎</title>
+	
 </head>
 <body>
-用户注册信息：
-<form action="register" method="post" onsubmit="return mycheck()">
-<c:if test="${!empty errorMsg }">
-	<div style="color=red">${errorMsg }</div>
-</c:if>
+欢迎访问论坛：
+<form action="index" method="get" >
 <table boarder="1px" width="60%">
 	<tr>
 		<td width="20%">用户名</td>
