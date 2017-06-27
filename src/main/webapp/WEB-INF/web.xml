@@ -94,6 +94,7 @@
 	<!-- 将html为后缀的url由SpringMVC Servlet处理 -->
 	<servlet-mapping>
 		<servlet-name>SpringMVC</servlet-name>
+		 <!-- 不可以用 /* 来代替所有的路径,这里拦截的是所有的路径，  故意的，一般不要这样写，而是要加上一些限制 --> 
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
