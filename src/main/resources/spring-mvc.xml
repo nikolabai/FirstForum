@@ -18,6 +18,9 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
 	
 	
+	<!-- <mvc:default-servlet-handler/> -->
+	
+	
 	<!-- 启用spring mvc 注解 -->
     <context:annotation-config />
     
