@@ -32,6 +32,7 @@ public class RegisterController extends BaseController{
 		logger.info("调用controller");
 		System.out.println(user);
 		ModelAndView view =new ModelAndView();
+		view.setViewName("/success");
 		try {
 			userService.register(user);
 		} catch (UserExistsException e) {
@@ -41,8 +42,8 @@ public class RegisterController extends BaseController{
 			view.setViewName("forward:/register.jsp");
 		}
 		setSessionUser(request, user);
-		return new ModelAndView("success");
-		
+//		return new ModelAndView("success");
+		return view;
 	}
 	@RequestMapping(value="/index",method=RequestMethod.GET) 
 	public String index(){ 
