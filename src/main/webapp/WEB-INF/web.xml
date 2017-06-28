@@ -80,6 +80,15 @@
 	  <url-pattern>*.html</url-pattern>
 	</filter-mapping>
 	
+	<!-- 拦截静态资源，但是当前的设置必须在Spring的Dispatcher的前面 -->
+	<!-- <servlet-mapping>    
+    	<servlet-name>default</servlet-name>    
+    	<url-pattern>*.js</url-pattern>    
+    	<url-pattern>*.css</url-pattern>    
+    	<url-pattern>/assets/*"</url-pattern>    
+    	<url-pattern>/images/*</url-pattern>    
+	</servlet-mapping> -->
+	
 	<!-- springmvc配置 -->
 	<servlet>
 		<servlet-name>SpringMVC</servlet-name>

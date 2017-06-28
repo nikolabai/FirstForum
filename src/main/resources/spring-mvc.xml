@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/mvc  
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
 	
-	
+	<!--在spring-mvc.xml中启用默认Servlet，拦截静态资源  -->
 	<!-- <mvc:default-servlet-handler/> -->
 	
 	
