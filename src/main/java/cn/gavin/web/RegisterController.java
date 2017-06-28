@@ -26,7 +26,7 @@ public class RegisterController extends BaseController{
 	private UserService userService;
 	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
 	//用户注册
-	@RequestMapping(value="/register")
+	@RequestMapping(value="/register.do")
 	public ModelAndView register(HttpServletRequest request, User user){
 //	public ModelAndView register(@RequestParam("userName") String userName, @RequestParam("password") String password){
 		logger.info("调用controller");
