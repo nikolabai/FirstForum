@@ -10,8 +10,8 @@
 <title>用户注册</title>
 <script>
 	function mycheck(){
-		if(document.all("user.password").value!=document.al("again").value){
-			alert("两次输入的密码不正确，请更正。");
+		if(document.all("password").value!=document.all("again").value){
+			alert("两次输入的密码不一致，请更正。");
 			return false;
 		}else{
 			return true;
@@ -29,7 +29,7 @@
 <table boarder="1px" width="60%">
 	<tr>
 		<td width="20%">用户名</td>
-		<td width="80%"><input type= "text" id="userName" name ="userName" onblur="checkUserName(this)"/><span id="usernameMsg" class="error"></td>
+		<td width="80%"><input type= "text" id="userName" name ="userName" onblur="checkUserName(this)"/><span id="usernameMsg" class="error"></span></td>
 	</tr>
 	<tr>
 		<td width="20%">密码</td>

@@ -91,7 +91,7 @@ function checks(t) {
   */ 
 function change_submit()  
 {   	
-	if(name_flag&&email_flag&&password_flag&&accept_flag){
+	if(name_flag){
 		  document.forms['formUser'].elements['Submit1'].disabled = '';  
 	}
    else  
