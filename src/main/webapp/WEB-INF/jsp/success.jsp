@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>用户注册成功</title>
 </head>
 <body>
-成功！
+<center>  
+<h1><b>欢迎新用户</b></h1>  
+用户名：${user.userName}<br>    
+</center>  
 </body>
 </html>

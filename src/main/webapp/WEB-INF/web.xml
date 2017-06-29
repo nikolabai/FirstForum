@@ -107,6 +107,16 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
+	 <!-- ajax -->
+	<!-- <servlet>  
+    	<servlet-name>DoAjaxServlet</servlet-name>  
+    	<servlet-class>cn.gavin.validation.DoAjaxServlet</servlet-class>  
+	</servlet>  
+	<servlet-mapping>  
+   	 	<servlet-name>DoAjaxServlet</servlet-name>  
+    	<url-pattern>/register.do</url-pattern>  
+	</servlet-mapping>   -->
+	
 	
   	<!-- 浏览器不支持put，delete，等method，由该filter将***?_method=delete或 ***?_method=put转换为标准的http delete、put方法-->
   	<filter>

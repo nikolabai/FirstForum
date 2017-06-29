@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="js/jquery-3.2.1.js"></script>  
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>  
+<script type="text/javascript" src="js/register.js"></script>
 <title>用户注册</title>
 <script>
 	function mycheck(){
@@ -14,7 +17,8 @@
 			return true;
 		}
 	}
-</script>		
+</script>
+	
 </head>
 <body>
 用户注册信息：
@@ -25,11 +29,11 @@
 <table boarder="1px" width="60%">
 	<tr>
 		<td width="20%">用户名</td>
-		<td width="80%"><input type= "text" name ="userName"/></td>
+		<td width="80%"><input type= "text" id="userName" name ="userName" onblur="checkUserName(this)"/><span id="usernameMsg" class="error"></td>
 	</tr>
 	<tr>
 		<td width="20%">密码</td>
-		<td width="80%"><input type= "password" name ="password"/></td>
+		<td width="80%"><input type= "password"  id="password" name ="password"/><span id="passwordMsg" class="error"></span></td>
 	</tr>
 	<tr>
 		<td width="20%">密码确认</td>

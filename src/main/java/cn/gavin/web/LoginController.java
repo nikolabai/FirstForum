@@ -45,7 +45,7 @@ public class LoginController extends BaseController{
 		}else{
 			dbUser.setLastIp(request.getRemoteAddr());
 			dbUser.setLastVisit(new Date());
-//			userService.loginSuccess(dbUser);
+			userService.loginSuccess(dbUser);
 			setSessionUser(request, dbUser);
 			String toUrl = (String) request.getSession().getAttribute(Constants.LOGIN_TO_URL);
 			request.getSession().removeAttribute(Constants.LOGIN_TO_URL);
