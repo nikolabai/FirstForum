@@ -64,16 +64,21 @@ public class RegisterController extends BaseController{
 	
 	@RequestMapping(value="/checkUserName.do",method = RequestMethod.POST)  
     public String checkUserName(HttpServletRequest request, HttpServletResponse response) throws IOException{  
-        String userName=(String)request.getParameter("userName");             
+        String userName=(String)request.getParameter("userName");  
+        System.out.println(userName);
+        System.out.println(request.getParameter("userName"));
         //检验用户名是否存在  
         //用户名是否存在的标志  
         User uz = userDao.getUserByUserName(userName);
+        System.out.println("zz");
+        System.out.println(uz);//null
         boolean flag;
         if(uz!=null){
 			 flag=true;
-			
+			System.out.println(flag);
 		}else{
 			flag=false;
+			System.out.println(flag);
 		}
         //将数据转换成json  
         Map<String,Object> map = new HashMap<String,Object>();    

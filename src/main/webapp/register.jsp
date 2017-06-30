@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/jquery-3.2.1.js"></script>  
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>  
-<script type="text/javascript" src="js/register.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script>  
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>  
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/register.js"></script>
 <title>用户注册</title>
 <script>
 	function mycheck(){
@@ -17,6 +17,11 @@
 			return true;
 		}
 	}
+	/* function upperCase()
+	{
+	var x=document.getElementById("userName").value
+	document.getElementById("userName").value=x.toUpperCase()
+	} */
 </script>
 	
 </head>
@@ -26,14 +31,14 @@
 <c:if test="${!empty errorMsg }">
 	<div style="color=red">${errorMsg }</div>
 </c:if>
-<table boarder="1px" width="60%">
+<table boarder="5px solid red" width="60%">
 	<tr>
 		<td width="20%">用户名</td>
-		<td width="80%"><input type= "text" id="userName" name ="userName" onblur="checkUserName(this)"/><span id="usernameMsg" class="error"></span></td>
+		<td width="80%"><input type= "text" id ="userName" name ="userName" onblur="checkUserName(this)"/><SPAN id="username_notice" >*</SPAN></td>
 	</tr>
 	<tr>
 		<td width="20%">密码</td>
-		<td width="80%"><input type= "password"  id="password" name ="password"/><span id="passwordMsg" class="error"></span></td>
+		<td width="80%"><input type= "password" id ="password"  name ="password"/></td>
 	</tr>
 	<tr>
 		<td width="20%">密码确认</td>
