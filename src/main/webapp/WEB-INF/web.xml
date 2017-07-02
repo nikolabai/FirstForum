@@ -1,143 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
-		http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-		
-		
-  <description>第一论坛</description>	
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <description>第一论坛</description>
   <display-name>FirstForum</display-name>
-  
-  
-  
-  <!-- spring监听器 -->
   <listener>
-  		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  
-  <!-- 指定spring配置文件和初始化监听器 -->
   <context-param>
-  		<param-name>contextConfigLocation</param-name>
-  		<param-value>classpath*:/spring.xml</param-value>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:/spring.xml</param-value>
   </context-param>
-  
-  <!-- Spring的OpenSessionInView实现 此监听器应该在struts2的监听器前面 ,(解决延时加载问题)-->
   <filter>
-  		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
-  		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter </filter-class>
+    <filter-name>hibernateOpenSessionInViewFilter</filter-name>
+    <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter </filter-class>
   </filter>
   <filter-mapping>
-  		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
-  		<url-pattern>/*</url-pattern>
+    <filter-name>hibernateOpenSessionInViewFilter</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
-	<!--log4j配置文件加载-->  
-   <context-param>      
-       <param-name>log4jConfigLocation</param-name>      
-       <param-value>classpath:log4j.properties</param-value>      
-   </context-param>  
-   <!-- 启动一个watchdog线程每1800秒扫描一下log4j配置文件的变化 -->  
-   <!-- <context-param>      
-       <param-name>log4jRefreshInterval</param-name>      
-       <param-value>1800000</param-value>      
-   </context-param>  -->  
-   <!-- spring log4j监听器 -->  
-   <listener>      
-       <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>      
-   </listener>   
-  <!-- 论坛登陆验证过滤器 -->
-  <filter> 
-  		<filter-name>forumFilter</filter-name>
-  		<filter-class>cn.gavin.filter.ForumFilter</filter-class>
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:log4j.properties</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+  <filter>
+    <filter-name>forumFilter</filter-name>
+    <filter-class>cn.gavin.filter.ForumFilter</filter-class>
   </filter>
-  
   <filter-mapping>
-  		<filter-name>forumFilter</filter-name>
-  		<url-pattern>*.html</url-pattern>
+    <filter-name>forumFilter</filter-name>
+    <url-pattern>*.html</url-pattern>
   </filter-mapping>
-  
   <filter-mapping>
-  		<filter-name>forumFilter</filter-name>
-  		<url-pattern>*.jsp</url-pattern>
+    <filter-name>forumFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
-  
-  <!-- 使用Spring的编码转换过滤器，将请求信息的编码统一转换为UTF-8，以避免中文乱码问题 -->
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-   
     <init-param>
-       <param-name>encoding</param-name>
-       <param-value>UTF-8</param-value>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
     </init-param>
     <init-param>
-       <param-name>forceEncoding</param-name>
-       <param-value>true</param-value>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
     </init-param>
   </filter>
- 
-	<filter-mapping>
-	  <filter-name>encodingFilter</filter-name>
-	  <url-pattern>*.html</url-pattern>
-	</filter-mapping>
-	
-	<!-- 拦截静态资源，但是当前的设置必须在Spring的Dispatcher的前面 -->
-	<!-- <servlet-mapping>    
-    	<servlet-name>default</servlet-name>    
-    	<url-pattern>*.js</url-pattern>    
-    	<url-pattern>*.css</url-pattern>    
-    	<url-pattern>/assets/*"</url-pattern>    
-    	<url-pattern>/images/*</url-pattern>    
-	</servlet-mapping> -->
-	
-	<!-- springmvc配置 -->
-	<servlet>
-		<servlet-name>SpringMVC</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<!--  -->
-		<init-param><!--用来定义参数,可有多个init-param。在servlet类中通过getInitParamenter(String name)方法访问初始化参数    -->  
-            <param-name>contextConfigLocation</param-name>  <!--参数名称-->  
-            <param-value>classpath*:/spring-mvc.xml</param-value> <!--参数值-->  
-        </init-param> 
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<!-- 将html为后缀的url由SpringMVC Servlet处理 -->
-	<servlet-mapping>
-		<servlet-name>SpringMVC</servlet-name>
-		 <!-- 不可以用 /* 来代替所有的路径,这里拦截的是所有的路径，  故意的，一般不要这样写，而是要加上一些限制 --> 
-		<url-pattern>*.do</url-pattern>
-	</servlet-mapping>
-	
-	 <!-- ajax -->
-	<!-- <servlet>  
-    	<servlet-name>DoAjaxServlet</servlet-name>  
-    	<servlet-class>cn.gavin.validation.DoAjaxServlet</servlet-class>  
-	</servlet>  
-	<servlet-mapping>  
-   	 	<servlet-name>DoAjaxServlet</servlet-name>  
-    	<url-pattern>/register.do</url-pattern>  
-	</servlet-mapping>   -->
-	
-	
-  	<!-- 浏览器不支持put，delete，等method，由该filter将***?_method=delete或 ***?_method=put转换为标准的http delete、put方法-->
-  	<filter>
-  		<filter-name>HiddenHttpMethodFilter</filter-name>
-  		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-  	</filter>
-  	<filter-mapping>
-  		<filter-name>HiddenHttpMethodFilter</filter-name>
-  		<servlet-name>SpringMVC</servlet-name>
-  	</filter-mapping>
-  
-  	<!-- 显示时按顺序从第一个找起，如果第一个存在，就显示第一个，后面的不起作用。如果第一个不存在，就找第二个，以此类推 -->
-	  <welcome-file-list>
-	  	<welcome-file>register.jsp</welcome-file>
-	  	
-	    <welcome-file>index.html</welcome-file>
-	    <welcome-file>index.htm</welcome-file>
-	    <welcome-file>index.jsp</welcome-file>
-	    <welcome-file>default.html</welcome-file>
-	    <welcome-file>default.htm</welcome-file>
-	    <welcome-file>default.jsp</welcome-file>
-	    
-	  </welcome-file-list>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>*.html</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath*:/spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <servlet-name>SpringMVC</servlet-name>
+  </filter-mapping>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>register.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>

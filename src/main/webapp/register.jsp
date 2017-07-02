@@ -17,11 +17,6 @@
 			return true;
 		}
 	}
-	/* function upperCase()
-	{
-	var x=document.getElementById("userName").value
-	document.getElementById("userName").value=x.toUpperCase()
-	} */
 </script>
 	
 </head>
@@ -38,7 +33,7 @@
 	</tr>
 	<tr>
 		<td width="20%">密码</td>
-		<td width="80%"><input type= "password" id ="password"  name ="password"/></td>
+		<td width="80%"><input type= "password" id ="password"  name ="password" onblur="checkPassword(this)"/><SPAN id="password_notice" >*</SPAN></td>
 	</tr>
 	<tr>
 		<td width="20%">密码确认</td>
