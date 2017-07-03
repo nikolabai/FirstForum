@@ -31,15 +31,13 @@ public class LoginController extends BaseController{
 	private UserService userService;
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	//用户登陆
-	@RequestMapping("/doLogin.do")
+	@RequestMapping("/doLogin")
 	public ModelAndView login(HttpServletRequest request,User user){
-		
-		
 		logger.info("调用controller");
 		
 		User dbUser =userService.getUserByUserName(user.getUserName());
 		ModelAndView mav=new  ModelAndView();
-		mav.setViewName("forward:/login.jsp");
+		mav.setViewName("forward:login");
 		
 		if (dbUser==null) {
 			mav.addObject("errorMsg","用户名不存在");

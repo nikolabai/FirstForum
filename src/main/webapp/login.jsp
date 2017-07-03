@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script> --%>
 <title>用户登陆</title>
 	
 </head>
 <body>
 登陆：
-<form action="login/doLogin.do" method="get" >
+<form action="login/doLogin" method="post" >
 <c:if test="${!empty errorMsg }">
 	<div style="color=red">${errorMsg }</div>
 </c:if>

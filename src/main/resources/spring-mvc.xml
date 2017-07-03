@@ -17,27 +17,29 @@
         http://www.springframework.org/schema/mvc  
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
 	
-	<!--在spring-mvc.xml中启用默认Servlet，拦截静态资源  -->
+	<!--防止静态资源被拦截第一个方法！！！！在spring-mvc.xml中启用默认Servlet，拦截静态资源  -->
 	<!-- <mvc:default-servlet-handler/> -->
-	
 	
 	<!-- 启用spring mvc 注解 -->
     <context:annotation-config />
     
-    
 	<!-- 自动扫描cn.gavin.web包下的@Controller标注的类控制器 -->
-	<!-- <context:component-scan base-package="cn.gavin.web"/> -->
 	<context:component-scan base-package="cn.gavin.web" >      
     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />    
 	</context:component-scan> 
-	
-	
 	
 	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+	
+	 <!-- 防止静态资源被拦截第二个方法！！！！！Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+    <!-- <resources mapping="/css/**" location="/css/" />
+    <resources mapping="/images/**" location="/images/" />
+    <resources mapping="/js/**" location="/js/" /> -->
+     
+    
 	<!-- 文件上传表单的视图解析器 -->  
    <!--  <bean id="multipartResolver"    
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
@@ -46,8 +48,6 @@
     <bean id="messageSource"
     	class="org.springframework.context.support.ResourceBundleMessageSource"
     	p:basename=""/>  -->
-    
-    
     
     <!-- web异常解析处理 -->
     <!--  Spring MVC处理异常有3种方式： 

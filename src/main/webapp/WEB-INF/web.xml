@@ -52,6 +52,16 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>*.html</url-pattern>
   </filter-mapping>
+  
+  <!-- 防止静态资源被拦截第三个方法-->
+  <!-- <servlet-mapping>  
+	  <servlet-name>default</servlet-name>  
+	  <url-pattern>/js/*</url-pattern>  
+	  <url-pattern>/css/*</url-pattern>  
+	  <url-pattern>/images/*</url-pattern>  
+	  <url-pattern>/fonts/*</url-pattern>  
+  </servlet-mapping> -->
+  
   <servlet>
     <servlet-name>SpringMVC</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -63,7 +73,8 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SpringMVC</servlet-name>
-    <url-pattern>*.do</url-pattern>
+    <!-- <url-pattern>*.do</url-pattern> -->
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>HiddenHttpMethodFilter</filter-name>
@@ -74,8 +85,8 @@
     <servlet-name>SpringMVC</servlet-name>
   </filter-mapping>
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
-    <welcome-file>register.jsp</welcome-file>
+    <!-- <welcome-file>login.jsp</welcome-file>
+    <welcome-file>register.jsp</welcome-file> -->
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
