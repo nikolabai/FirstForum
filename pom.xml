@@ -31,6 +31,7 @@
 		<!-- slf4j+log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.10</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+        <shiro.version>1.3.2</shiro.version>  
 	</properties>
   
 
@@ -54,7 +55,7 @@
 
 	<!--6. 指定maven仓库 -->
 	<repositories><!-- 发现依赖和扩展的远程资源库 -->
-		<!-- maven自己官方仓库 -->
+		<!-- maven官方仓库 -->
 		<repository>
 			<id>maven</id>
 			<name>Maven Repository Switchboard</name>
@@ -230,20 +231,20 @@
     		<classifier>jdk15</classifier>
 		</dependency>
 
-		<!-- 7.9 使用 Jackson 把 Java 对象转换成 JSON 字串 -->
+		<!--  使用 Jackson 把 Java 对象转换成 JSON 字串 -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.11</version>
 		</dependency>
-		<!-- 7.10 mysql驱动包 -->
+		<!-- 7.9 mysql驱动包 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.29</version>
 		</dependency>
 		
-		<!-- 7.12 apache commons jar -->
+		<!-- 7.10 apache commons jar -->
 		<dependency>
     		<groupId>commons-validator</groupId>
     		<artifactId>commons-validator</artifactId>
@@ -254,30 +255,15 @@
     		<artifactId>commons-digester3</artifactId>
     		<version>3.2</version>
 		</dependency>
-		<!--  导入dbcp的jar包(c3p0也可以)，用来在applicationContext.xml中配置数据库 -->
+		<!-- 7.11 dbcp(常用的数据库连接池还有druid,c3p0等)，用来在applicationContext.xml中配置数据库 -->
 		<dependency>
     		<groupId>commons-dbcp</groupId>
    		    <artifactId>commons-dbcp</artifactId>
     		<version>1.4</version>
 		</dependency>
-		<dependency>
-		<!-- 7.11connect pool with c3p0 -->
-		<!-- <dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-		</dependency> -->
-		<!--  -->
-    		<groupId>commons-beanutils</groupId>
-    		<artifactId>commons-beanutils</artifactId>
-    		<version>1.9.2</version>
-		</dependency>
-		<dependency>
-    		<groupId>commons-collections</groupId>
-    		<artifactId>commons-collections</artifactId>
-    		<version>3.2.1</version>
-		</dependency>
-		<!--  文件上传 -->
+		
+		
+		<!-- 7.12 文件上传 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -294,7 +280,7 @@
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.2</version>
 		</dependency>
-		<!-- hibernate二级缓存插件 -->
+		<!-- 7.13  hibernate二级缓存插件 -->
 		<dependency>
     		<groupId>net.sf.ehcache</groupId>
     		<artifactId>ehcache</artifactId>
@@ -306,12 +292,44 @@
     		<version>${hibernate.version}</version>
 		</dependency>
 		
-		<!--不知道干什么用的  -->
+		<!--7.14 不知道干什么用的  -->
 		<dependency>
     		<groupId>javassist</groupId>
     		<artifactId>javassist</artifactId>
     		<version>3.12.1.GA</version>
 		</dependency>
+		<dependency>
+    		<groupId>commons-beanutils</groupId>
+    		<artifactId>commons-beanutils</artifactId>
+    		<version>1.9.2</version>
+		</dependency>
+		<dependency>
+    		<groupId>commons-collections</groupId>
+    		<artifactId>commons-collections</artifactId>
+    		<version>3.2.1</version>
+		</dependency>
+		
+		<!-- 7.15 shiro -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>  
+            <groupId>org.apache.shiro</groupId>  
+            <artifactId>shiro-ehcache</artifactId>  
+            <version>${shiro.version}</version>  
+        </dependency>
 		
 	</dependencies>
 </project>
