@@ -10,6 +10,7 @@
 		<config>src/main/resources/spring-hibernate.xml</config>
 		<config>src/main/resources/spring.xml</config>
 		<config>src/main/resources/spring-mvc.xml</config>
+		<config>src/main/resources/spring-shiro.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	
+    <!-- 添加securityManager定义  -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+    <property name="realm" ref="myRealm" />  
+	</bean>
+    <!-- 項目自定义的Realm -->
+    <bean id="myRealm" class="cn.gavin.shiro.realm.MyRealm" ></bean>
+    
+	
+	
+	
+
+    <!-- shiro为集成spring -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/system/error</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter"
+        class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/" />
+        <property name="successUrl" value="/system/main" />
+        <property name="unauthorizedUrl" value="/system/error" />
+        <property name="filterChainDefinitions">
+            <value>
+            /login = anon
+            /validateCode = anon
+            /** = authc
+            </value>
+        </property>
+    </bean>
+    
+</beans>

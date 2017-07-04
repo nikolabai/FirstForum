@@ -17,15 +17,14 @@
         http://www.springframework.org/schema/mvc  
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
 	
-	
+	<!-- 开启注解 注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean，解决了@Controller注解使用的前提，不注册这两个bean的情况下是无法使用@Controller注解的-->
 	<mvc:annotation-driven />
 	
-	<!--防止静态资源被拦截第一个方法！！！！在spring-mvc.xml中启用默认Servlet，拦截静态资源  -->
+	<!--防止静态资源被拦截第一个方法！！！！在spring-mvc.xml中启用默认Servlet，拦截静态资源(js、image等)  -->
 	<mvc:default-servlet-handler/>
 	
-	<!-- 启用spring mvc 注解 -->
+	<!-- 启用spring mvc 注解，对指定的包进行扫描，同时将带有@Controller注解的bean进行注册 -->
     <context:annotation-config />
-    
 	<!-- 自动扫描cn.gavin.web包下的@Controller标注的类控制器 -->
 	<context:component-scan base-package="cn.gavin.web" >      
     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />    
@@ -83,5 +82,17 @@
 	        </props>  
 	    </property>  
 	</bean> -->
+	
+	<!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->
+    <bean
+        class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+        depends-on="lifecycleBeanPostProcessor" />
+    <bean
+        class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
+    
+    <bean id="lifecycleBeanPostProcessor"
+        class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
 </beans>
