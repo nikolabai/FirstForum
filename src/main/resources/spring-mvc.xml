@@ -18,7 +18,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
 	
 	<!--防止静态资源被拦截第一个方法！！！！在spring-mvc.xml中启用默认Servlet，拦截静态资源  -->
-	<!-- <mvc:default-servlet-handler/> -->
+	<mvc:default-servlet-handler/> 
 	
 	<!-- 启用spring mvc 注解 -->
     <context:annotation-config />
