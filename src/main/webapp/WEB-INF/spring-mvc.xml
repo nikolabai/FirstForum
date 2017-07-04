@@ -18,14 +18,8 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
 	
 	
-	<mvc:annotation-driven />
-	
 	<!--防止静态资源被拦截第一个方法！！！！在spring-mvc.xml中启用默认Servlet，拦截静态资源  -->
-<<<<<<< HEAD
 	<mvc:default-servlet-handler/> 
-=======
-	<mvc:default-servlet-handler/>
->>>>>>> branch 'master' of https://github.com/nikolabai/FirstForum.git
 	
 	<!-- 启用spring mvc 注解 -->
     <context:annotation-config />
@@ -48,7 +42,7 @@
      
     
 	<!-- 文件上传表单的视图解析器 -->  
-   <!--  <bean id="multipartResolver"    
+    <!--  <bean id="multipartResolver"    
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
         p:defaultEncoding="utf-8"  /> 
         one of the properties available; the maximum file size in bytes    

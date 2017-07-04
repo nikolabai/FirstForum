@@ -3,6 +3,8 @@ package cn.gavin.web;
  * 
  * @author Gavin
  * @2017年5月31日
+ *
+ *  版块管理：删除主题，删除回复，指定精华帖------------发表主题，回复
  */
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -18,6 +18,7 @@ import cn.gavin.service.UserService;
  * 
  * @author Gavin
  * @2017年5月31日
+ * 论坛管理：版块创建，指定论坛版块管理员，用户的锁定和解锁-------------
  */
 @Controller
 public class ForumManageController extends BaseController{
