@@ -62,7 +62,7 @@ public class RegisterController extends BaseController{
 	}
 	
 	
-	@RequestMapping(value="/checkUserName.do",method = RequestMethod.POST)  
+	@RequestMapping(value="/checkUserName",method = RequestMethod.POST)  
     public String checkUserName(HttpServletRequest request, HttpServletResponse response) throws IOException{  
         String userName=(String)request.getParameter("userName");  
         System.out.println(userName);
