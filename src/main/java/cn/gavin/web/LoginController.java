@@ -37,7 +37,7 @@ public class LoginController extends BaseController{
 		
 		User dbUser =userService.getUserByUserName(user.getUserName());
 		ModelAndView mav=new  ModelAndView();
-		mav.setViewName("forward:login");
+		mav.setViewName("forward:/login.jsp");
 		
 		if (dbUser==null) {
 			mav.addObject("errorMsg","用户名不存在");
