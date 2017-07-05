@@ -19,8 +19,8 @@ import cn.gavin.domain.User;
  */
 
 @Controller
-public class UserController {
-private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+public class ShiroController {
+private static final Logger logger = LoggerFactory.getLogger(ShiroController.class);
     
     /**
      * 判断用户是否登录

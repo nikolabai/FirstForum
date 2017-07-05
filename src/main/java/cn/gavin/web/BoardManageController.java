@@ -1,9 +1,4 @@
 package cn.gavin.web;
-/**
- * 
- * @author Gavin
- * @2017年5月31日
- */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.gavin.domain.Board;
 import cn.gavin.service.ForumService;
+
+/**
+ * 
+ * @author Gavin
+ * @2017年5月31日
+ *
+ *  版块管理：删除主题，删除回复，指定精华帖+++++发表主题，回复
+ */
+
 
 public class BoardManageController extends BaseController{
 	@Autowired

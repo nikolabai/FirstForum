@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>欢迎</title>
+<title>首页</title>
 	
 </head>
 <body>
 
-<p>欢迎加入百家争鸣</p>
+<p>首页</p>
 <a href="/FirstForum/login.jsp">登陆</a>
 <a href="/FirstForum/register.jsp">注册</a>
 </body>
