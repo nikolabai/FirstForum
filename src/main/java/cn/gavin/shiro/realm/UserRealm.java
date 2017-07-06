@@ -18,7 +18,7 @@ import org.apache.shiro.subject.PrincipalCollection;
  */
 
 
-public class MyRealm extends AuthorizingRealm{
+public class UserRealm extends AuthorizingRealm{
 
     @Autowired
     private UserService userService;
@@ -29,12 +29,12 @@ public class MyRealm extends AuthorizingRealm{
     }
 
     /**
-     *  认证回调函数,登录时调用.
+     *  登陆认证
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(
-            AuthenticationToken authcToken) throws AuthenticationException {
-        UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
+    	//令牌——基于用户名和密码的令牌
+    	UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = userService.getUserByUserName(token.getUsername());
         if (user != null) {
             return new SimpleAuthenticationInfo(user.getUserName(), user

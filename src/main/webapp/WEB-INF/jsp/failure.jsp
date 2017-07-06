@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>测试shiro</title>
+<title>失败</title>
 </head>
 <body>
-<form action="shirologin" method="post">
-用户名:<input type="text" name="userName"/> <br/>
-密码:<input type="text" name="password"/><br/>
-<input type="submit" value="登录" />
-</form>
+<center>  
+<h1><b>操作失败</b></h1>  
+  
+</center>  
 </body>
 </html>

@@ -4,14 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>首页</title>
-	
+<title>测试shiro</title>
 </head>
 <body>
-
-<p>首页</p>
-<a href="/FirstForum/login.jsp">登陆</a>
-<a href="/FirstForum/register.jsp">注册</a>
-<a href="/FirstForum/shiroLogin.jsp">shrio登陆</a>
+<form action="shiroLoginin" method="post">
+用户名:<input type="text" name="userName"/> <br/>
+密码:<input type="text" name="password"/><br/>
+<input type="submit" value="登录" />
+</form>
 </body>
 </html>

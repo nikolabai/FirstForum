@@ -17,11 +17,6 @@
         http://www.springframework.org/schema/mvc  
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
 	
-	<!-- 开启注解 注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean，解决了@Controller注解使用的前提，不注册这两个bean的情况下是无法使用@Controller注解的-->
-	<mvc:annotation-driven />
-	
-	<!--防止静态资源被拦截第一个方法！！！！在spring-mvc.xml中启用默认Servlet，拦截静态资源(js、image等)  -->
-	<mvc:default-servlet-handler/>
 	
 	<!-- 启用spring mvc 注解，对指定的包进行扫描，同时将带有@Controller注解的bean进行注册 -->
     <context:annotation-config />
@@ -30,24 +25,35 @@
     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />    
 	</context:component-scan> 
 	
+	<!-- 开启注解 注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean，解决了@Controller注解使用的前提，不注册这两个bean的情况下是无法使用@Controller注解的-->
+	<!--此处使用conversionService为了自动注册HttpMessageConverter支持@RequestBody和@ResponseBody-->
+	<mvc:annotation-driven conversion-service="conversionService"/>
+	
+	<!--用于解析@RequestBody-->
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean>
+	
+	<!--防止静态资源被拦截第一个方法！！！！在spring-mvc.xml中启用默认Servlet，拦截静态资源(js、image等)  -->
+	<mvc:default-servlet-handler/>
+	
+	<!-- 防止静态资源被拦截第二个方法！！！！！Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+    <!-- <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/js/**" location="/js/" /> -->
+	
 	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	
-	 <!-- 防止静态资源被拦截第二个方法！！！！！Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-    <!-- <mvc:resources mapping="/css/**" location="/css/" />
-    <mvc:resources mapping="/images/**" location="/images/" />
-    <mvc:resources mapping="/js/**" location="/js/" /> -->
-     
-    
 	<!-- 文件上传表单的视图解析器 -->  
-   <!--  <bean id="multipartResolver"    
+    <bean id="multipartResolver"    
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
         p:defaultEncoding="utf-8"  /> 
-        one of the properties available; the maximum file size in bytes    
-    <bean id="messageSource"
+        
+    <!-- one of the properties available; the maximum file size in bytes -->    
+    <!-- <bean id="messageSource"
     	class="org.springframework.context.support.ResourceBundleMessageSource"
     	p:basename=""/>  -->
     
@@ -83,8 +89,14 @@
 	    </property>  
 	</bean> -->
 	
+	
+	<!-- shiro -->
+	
 	<!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->
-    <bean
+	<!-- 开启Shiro的注解，实现对Controller的方法级权限检查(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 -->  
+    <!-- 配置以下两个bean即可实现此功能, 应该放在spring-mvc.xml中 -->  
+    <!-- Enable Shiro Annotations for Spring-configured beans. Only run after the lifecycleBeanProcessor has run -->  
+    <!-- <bean
         class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
         depends-on="lifecycleBeanPostProcessor" />
     <bean
@@ -93,6 +105,15 @@
     </bean>
     
     <bean id="lifecycleBeanPostProcessor"
-        class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+        class="org.apache.shiro.spring.LifecycleBeanPostProcessor" /> -->
+        
+    <!-- shiro为集成spring   处理异常 -->
+    <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/system/error</prop>
+            </props>
+        </property>
+    </bean> -->
 
 </beans>

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.gavin.cons.Constants;
+import cn.gavin.constants.Constants;
 import cn.gavin.domain.User;
 import cn.gavin.service.UserService;
 
