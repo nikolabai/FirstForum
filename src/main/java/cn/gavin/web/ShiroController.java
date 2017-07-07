@@ -3,6 +3,7 @@ package cn.gavin.web;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,10 +33,10 @@ private static final Logger logger = LoggerFactory.getLogger(ShiroController.cla
     	logger.info("进入");
         Subject user = SecurityUtils.getSubject();
         
-      //加密（md5+盐），返回一个32位的字符串小写  
-//        String salt="("+request.getParameter("username")+")";    
-//        String md5Pwd=new Md5Hash(request.getParameter("password"),salt).toString();
-        
+        //加密（md5+盐），返回一个32位的字符串小写  
+        String salt="("+currUser.getUserName()+")";    
+        String md5=new Md5Hash(currUser.getPassword(),salt).toString();
+        currUser.setPassword(md5);
         
         //传递token给shiro的realm 
         UsernamePasswordToken token = new UsernamePasswordToken(currUser.getUserName(),currUser.getPassword());

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,13 @@ public class RegisterController extends BaseController{
 	public ModelAndView register(HttpServletRequest request, User user){
 //	public ModelAndView register(@RequestParam("userName") String userName, @RequestParam("password") String password){
 		logger.info("调用controller");
-		System.out.println(user);
+		
+		//加密（md5+盐），返回一个32位的字符串小写  
+        String salt="("+user.getUserName()+")";    
+        String md5=new Md5Hash(user.getPassword(),salt).toString();
+        user.setPassword(md5);
+        
+        
 		ModelAndView view =new ModelAndView();
 		view.setViewName("/success");
 		try {

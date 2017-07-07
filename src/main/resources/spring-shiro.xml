@@ -5,15 +5,26 @@
 	   xsi:schemaLocation="
 	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-
+	
+	<!-- 凭证匹配器 -->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+        <property name="hashIterations" value="1"/>
+        <property name="storedCredentialsHexEncoded" value="true"/>
+    </bean>
+	
+	
 	<!-- 1、項目自定义的Realm -->
     <bean id="myRealm" class="cn.gavin.shiro.realm.UserRealm" ></bean>
     
     <!-- 2、添加securityManager定义  -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"> 
-    <!--单个realm使用realm,如果有多个realm，使用realms属性代替--> 
-    <property name="realm" ref="myRealm" /> 
-    <!-- <property name="cacheManager" ref="shiroEhcacheManager" /> --> 
+	    <!--单个realm使用realm,如果有多个realm，使用realms属性代替--> 
+	    <property name="realm" ref="myRealm" /> 
+	    <!-- 使用下面配置的缓存管理器 -->  
+	    <!-- <property name="cacheManager" ref="cacheManager" />  
+	    <property name="sessionManager" ref="sessionManager" />  --> 
+	    <property name="rememberMeManager" ref="rememberMeManager" /> 
 	</bean>
     
 	
@@ -61,4 +72,17 @@
     <!-- 4、保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" /> 
     
+    
+    <!-- remenberMe配置 -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+       <constructor-arg value="rememberMe" />
+       <property name="httpOnly" value="true" />
+       <!-- 默认记住7天（单位：秒） -->
+       <property name="maxAge" value="604800" />
+    </bean>
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+       <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+       <property name="cookie" ref="rememberMeCookie" />
+    </bean>
 </beans>
