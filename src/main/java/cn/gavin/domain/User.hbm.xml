@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-6-27 17:12:26 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-7-11 16:29:25 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="cn.gavin.domain.User" table="USER">
-        <id name="userId" type="int">
+        <id name="userId" type="int" access="field">
             <column name="USERID" />
-            <generator class="native" />
+            <generator class="assigned" />
         </id>
         <property name="userName" type="java.lang.String">
             <column name="USERNAME" />
@@ -29,5 +29,11 @@
         <property name="lastIp" type="java.lang.String">
             <column name="LASTIP" />
         </property>
+        <set name="roles" table="ROLE" inverse="false" lazy="true">
+            <key>
+                <column name="USERID" />
+            </key>
+            <one-to-many class="cn.gavin.domain.Role" />
+        </set>
     </class>
 </hibernate-mapping>

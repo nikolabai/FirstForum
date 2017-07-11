@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-11 16:29:25 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="cn.gavin.domain.UserRole" table="USERROLE">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <set name="users" table="USERROLE" inverse="true" cascade="all">
+            <key>
+                <column name="USERID" />
+            </key>
+            <many-to-one class="cn.gavin.domain.User" column=""/>
+        </set>
+        <set name="roles" table="USERROLE" inverse="false" lazy="true">
+            <key>
+                <column name="ROLEID" />
+            </key>
+            <many-to-one class="cn.gavin.domain.Role" column="" />
+        </set>
+    </class>
+</hibernate-mapping>

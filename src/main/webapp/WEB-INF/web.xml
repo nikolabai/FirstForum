@@ -28,6 +28,7 @@
 	  <filter-mapping>
 		  <filter-name>shiroFilter</filter-name>
 		  <url-pattern>/*</url-pattern>
+		  <dispatcher>REQUEST</dispatcher>
 	  </filter-mapping>
 	  
 	  <!-- 在web层打开hibernate session 以便可以在web层访问到hibernate延迟加载的数据 -->

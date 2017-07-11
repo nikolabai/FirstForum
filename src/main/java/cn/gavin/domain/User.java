@@ -3,11 +3,17 @@ package cn.gavin.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -22,8 +28,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_user")
 public class User implements Serializable{
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int userId;
 	private String userName;
 	private String password;
@@ -33,11 +42,20 @@ public class User implements Serializable{
 	private Date lastVisit;
 	private String lastIp;
 	
-	public int getUserId() {
+	private Set<Role> roles ;
+	
+	
+	
+	public  User() {
+	}
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public int getUserid() {
 		return userId;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserid(int userid) {
+		this.userId = userid;
 	}
 	public String getUserName() {
 		return userName;
@@ -81,11 +99,20 @@ public class User implements Serializable{
 	public void setLastIp(String lastIp) {
 		this.lastIp = lastIp;
 	}
+	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", userType=" + userType
-				+ ", locked=" + locked + ", credit=" + credit + ", lastVisit=" + lastVisit + ", lastIp=" + lastIp + "]";
+		return "User [userid=" + userId + ", userName=" + userName + ", password=" + password + ", userType=" + userType
+				+ ", locked=" + locked + ", credit=" + credit + ", lastVisit=" + lastVisit + ", lastIp=" + lastIp
+				+ ", roles=" + roles + "]";
 	}
+	
 	
 	
 	

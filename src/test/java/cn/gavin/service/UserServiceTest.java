@@ -43,7 +43,7 @@ public class UserServiceTest {
 	@Test
 	public void testRegister() throws UserExistsException {
 		User u =new User();
-		u.setUserId(14);
+		u.setUserid(14);
 		u.setUserName("mhe");
 		u.setPassword("1");
 		userService.register(u);
