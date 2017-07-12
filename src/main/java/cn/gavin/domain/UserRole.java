@@ -17,8 +17,8 @@ import javax.persistence.Table;
 @Table(name="t_user_role")
 public class UserRole {
 	private int id;
-	private Set<User> users;
-	private Set<Role> roles;
+	private User user;
+	private Role role;
 	
 	
 	public int getId() {
@@ -29,19 +29,19 @@ public class UserRole {
 	}
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="userId", unique=true)
-	public Set<User> getUsers() {
-		return users;
+	public User getUser() {
+		return user;
 	}
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="roleId", unique=true)
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 

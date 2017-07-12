@@ -25,7 +25,7 @@ public class Permission implements Serializable{
     private static final long serialVersionUID = -8792590494605747957L;
     
     
-    private Long id;
+    private Long permissionId;
     @Column(length=50)
     private String name;
     @Column(length=100)
@@ -38,12 +38,12 @@ public class Permission implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="permissionId")
 	public Long getId() {
-		return id;
+		return permissionId;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long permissionid) {
+		this.permissionId = permissionid;
 	}
 
 
@@ -91,7 +91,7 @@ public class Permission implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Permission [id=" + id + ", name=" + name + ", description=" + description + ", permission=" + permission
+		return "Permission [id=" + permissionId + ", name=" + name + ", description=" + description + ", permission=" + permission
 				+ ", roles=" + roles + "]";
 	}
 

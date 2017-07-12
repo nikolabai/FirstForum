@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-7-11 16:29:25 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-7-12 9:54:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="cn.gavin.domain.User" table="USER">
         <id name="userId" type="int" access="field">
@@ -29,11 +29,11 @@
         <property name="lastIp" type="java.lang.String">
             <column name="LASTIP" />
         </property>
-        <set name="roles" table="ROLE" inverse="false" lazy="true">
+        <set name="roles" table="USERROLE" cascade="all">
             <key>
                 <column name="USERID" />
             </key>
-            <one-to-many class="cn.gavin.domain.Role" />
+            <one-to-many class="cn.gavin.domain.UserRole" />
         </set>
     </class>
 </hibernate-mapping>

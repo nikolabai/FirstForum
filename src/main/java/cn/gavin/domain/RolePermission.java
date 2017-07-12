@@ -17,8 +17,8 @@ import javax.persistence.Table;
 @Table(name="t_role_permission")
 public class RolePermission {
 	private int id;
-	private Set<Role> roles;
-	private Set<Permission> permissions;
+	private Role role;
+	private Permission permission;
 	
 	
 	
@@ -30,19 +30,19 @@ public class RolePermission {
 	}
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="roleId", unique=true)
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="permissionId", unique=true)
-	public Set<Permission> getPermissions() {
-		return permissions;
+	public Permission getPermission() {
+		return permission;
 	}
-	public void setPermissions(Set<Permission> permissions) {
-		this.permissions = permissions;
+	public void setPermission(Permission permission) {
+		this.permission = permission;
 	}
 	
 }

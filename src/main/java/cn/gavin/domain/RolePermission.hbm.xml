@@ -1,24 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-7-11 16:29:25 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-7-12 10:25:21 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="cn.gavin.domain.RolePermission" table="ROLEPERMISSION">
         <id name="id" type="int">
             <column name="ID" />
             <generator class="assigned" />
         </id>
-        <set name="roles" table="ROLE" inverse="false" lazy="true">
-            <key>
-                <column name="ID" />
-            </key>
-            <one-to-many class="cn.gavin.domain.Role" />
-        </set>
-        <set name="permissions" table="PERMISSION" inverse="false" lazy="true">
-            <key>
-                <column name="ID" />
-            </key>
-            <one-to-many class="cn.gavin.domain.Permission" />
-        </set>
+        <many-to-one name="role" class="cn.gavin.domain.Role" cascade="all">
+            <column name="ROLEID" />
+        </many-to-one>
+        <many-to-one name="permission" class="cn.gavin.domain.Permission" cascade="all">
+            <column name="PERMISSIONID" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

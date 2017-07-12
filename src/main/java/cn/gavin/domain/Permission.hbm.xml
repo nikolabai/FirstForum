@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-7-11 16:29:25 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-7-12 9:54:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="cn.gavin.domain.Permission" table="PERMISSION">
-        <id name="id" type="java.lang.Long">
-            <column name="ID" />
+        <id name="permissionId" type="java.lang.Long" access="field">
+            <column name="PERMISSIONID" />
             <generator class="assigned" />
         </id>
         <property name="name" type="java.lang.String">
@@ -17,11 +17,11 @@
         <property name="permission" type="java.lang.String">
             <column name="PERMISSION" />
         </property>
-        <set name="roles" table="ROLE" inverse="false" lazy="true">
+        <set name="roles" table="ROLE" cascade="all">
             <key>
-                <column name="ID" />
+                <column name="PERMISSIONID" />
             </key>
-            <one-to-many class="cn.gavin.domain.Role" />
+            <one-to-many class="cn.gavin.domain.RolePermission" />
         </set>
     </class>
 </hibernate-mapping>
