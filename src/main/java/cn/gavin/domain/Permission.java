@@ -30,8 +30,6 @@ public class Permission implements Serializable{
     private String name;
     @Column(length=100)
     private String description;
-    @Column(length=50)
-    private String permission;
     private Set<Role> roles;
 
     @Id
@@ -41,39 +39,24 @@ public class Permission implements Serializable{
 		return permissionId;
 	}
 
-
 	public void setId(Long permissionid) {
 		this.permissionId = permissionid;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-
-	public String getPermission() {
-		return permission;
-	}
-
-
-	public void setPermission(String permission) {
-		this.permission = permission;
 	}
 
 	@OneToMany(mappedBy="permissions", cascade = CascadeType.ALL)
@@ -81,18 +64,14 @@ public class Permission implements Serializable{
 		return roles;
 	}
 
-
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 
-
-
-
 	@Override
 	public String toString() {
-		return "Permission [id=" + permissionId + ", name=" + name + ", description=" + description + ", permission=" + permission
-				+ ", roles=" + roles + "]";
+		return "Permission [id=" + permissionId + ", name=" + name + ", description=" + description + 
+				 ", roles=" + roles + "]";
 	}
 
     

@@ -14,9 +14,7 @@
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" />
         </property>
-        <property name="permission" type="java.lang.String">
-            <column name="PERMISSION" />
-        </property>
+        
         <set name="roles" table="ROLE" cascade="all">
             <key>
                 <column name="PERMISSIONID" />

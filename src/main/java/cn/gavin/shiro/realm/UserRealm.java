@@ -4,12 +4,14 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+
 import cn.gavin.domain.Permission;
 import cn.gavin.domain.Role;
 import cn.gavin.domain.User;
 import cn.gavin.service.UserService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -32,6 +34,39 @@ public class UserRealm extends AuthorizingRealm{
 
     @Autowired
     private UserService userService;
+    
+    
+    @Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+//		String userno = (String) principals.getPrimaryPrincipal();
+//		SysUser result = biz.queryByUserNo(userno);
+//		if(result!=null){
+//			List<SysRole> resultRole = biz.queryRoles(result.getId());
+//			if(resultRole.size()>0){
+//				//获取角色
+//				HashSet<String> roles = new HashSet<String>();
+//				for (SysRole sysRole : resultRole) {
+//					roles.add(sysRole.getRoleValue());
+//				}
+//				System.out.println("角色："+roles);
+//				authorizationInfo.setRoles(roles);
+//				
+//				//获取权限
+//				List<SysPermission> resultPermission = biz.queryPermissions(resultRole);
+//				if(resultPermission.size()>0){
+//					HashSet<String> permissions = new HashSet<String>();
+//					for (SysPermission sysPermission : resultPermission) {
+//						permissions.add(sysPermission.getPermissionValue());
+//					}
+//					System.out.println("权限："+permissions);
+//					authorizationInfo.setStringPermissions(permissions);
+//				}
+//			}
+//		}
+		return authorizationInfo;
+//		
+	}
     
 //    protected AuthorizationInfo doGetAuthorizationInfo(
 //            PrincipalCollection principals) {
@@ -127,9 +162,5 @@ public class UserRealm extends AuthorizingRealm{
         }
     }
 
-	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }
