@@ -7,11 +7,13 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.gavin.domain.User;
+import cn.gavin.shiro.realm.Anno;
 
 /**
  * 
@@ -22,7 +24,41 @@ import cn.gavin.domain.User;
 @Controller
 public class ShiroController {
 	private static final Logger logger = LoggerFactory.getLogger(ShiroController.class);
+	
+	@Autowired
+	private Anno anno;
+	@RequestMapping("/JSPlogin")
+    public String test(String userName,String password){
+        System.out.println("userName:"+userName);
+        System.out.println("password"+password);
 
+        //登录
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        Subject currentUser = SecurityUtils.getSubject();
+        //如果登录失败，会抛异常，应该要捕捉异常
+        currentUser.login(token);
+
+        if(currentUser.isAuthenticated()){
+            System.out.println("认证成功");
+            //有权限才能调用该方法，没权限将抛异常
+            anno.testAnnotation();
+        }
+
+        return "success";
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     /**
      * 判断用户是否登录
      * @param currUser

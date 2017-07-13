@@ -76,6 +76,7 @@ public class UserService {
 		loginLog.setLoginDate(new Date());
 		
 	}
+	@Transactional
 	public  Set<Role> getRoleByUserName(String userName) {
 		 User user=userDao.getUserByUserName(userName);
 		 Set<Role> set =user.getRoles();

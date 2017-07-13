@@ -13,13 +13,13 @@ import org.apache.shiro.util.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
- * 测试shiro授权
+ * 测试shiro授权--变成方式
  * @author Gavin
  * @2017年7月13日
  */
 
-public class Main {
-	private static final Logger logger = LoggerFactory.getLogger(Main.class);
+public class MainProgramming {
+	private static final Logger logger = LoggerFactory.getLogger(MainProgramming.class);
 	public static void main(String[] args) {
 		//获取SecurityManager的实例
         Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro-realm.ini");

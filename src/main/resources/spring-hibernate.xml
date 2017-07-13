@@ -26,6 +26,8 @@
 	<!-- 扫描cn.gavin.domain包下所有标注@Entity的服务组件 -->
 	<context:component-scan base-package="cn.gavin.domain"></context:component-scan>
 	
+	<context:component-scan base-package="cn.gavin.shiro.realm"></context:component-scan>
+	
 	
 	<!-- ************************数据源配置*********************************************** -->
 	<!-- 引入属性文件 -->

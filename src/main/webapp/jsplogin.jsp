@@ -4,15 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>首页</title>
-	
+<title>Insert title here</title>
 </head>
 <body>
-
-<p>首页</p>
-<a href="/FirstForum/login.jsp">登陆</a>
-<a href="/FirstForum/register.jsp">注册</a>
-<a href="/FirstForum/shiroLogin.jsp">shrio登陆</a>
-<a href="/FirstForum/jsplogin.jsp">jsp标签授权登陆</a>
+    <h1>login</h1>
+    <form action="login">
+        <label>userName:</label>
+        <input type="text" name="userName"/>
+        <label>password:</label>
+        <input type="text" name="password"/>
+        <input type="submit" value="submit"/>
+    </form>
 </body>
 </html>
