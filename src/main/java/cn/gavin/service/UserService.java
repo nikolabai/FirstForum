@@ -2,6 +2,7 @@ package cn.gavin.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.gavin.dao.LoginLogDao;
 import cn.gavin.dao.UserDao;
 import cn.gavin.domain.LoginLog;
+import cn.gavin.domain.Role;
 import cn.gavin.domain.User;
 import cn.gavin.exception.UserExistsException;
 
@@ -73,5 +75,10 @@ public class UserService {
 		loginLog.setIp(user.getLastIp());
 		loginLog.setLoginDate(new Date());
 		
+	}
+	public  Set<Role> getRoleByUserName(String userName) {
+		 User user=userDao.getUserByUserName(userName);
+		 Set<Role> set =user.getRoles();
+		 return set;
 	}
 }
