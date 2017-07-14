@@ -27,6 +27,11 @@ public class ShiroController {
 	
 	@Autowired
 	private Anno anno;
+	
+	
+	
+	
+	
 	@RequestMapping("/JSPlogin")
     public String test(String userName,String password){
         System.out.println("userName:"+userName);
@@ -44,7 +49,7 @@ public class ShiroController {
             anno.testAnnotation();
         }
 
-        return "success";
+        return "successshiro";
     }
 	
 	

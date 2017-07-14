@@ -5,4 +5,4 @@ hibernate4.3.11
 Mysql5.6
 日志slf4j+log4j
 ajax+jquery
-shiro
+shiro权限管理

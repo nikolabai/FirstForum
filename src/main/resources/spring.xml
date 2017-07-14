@@ -21,7 +21,19 @@
 	
 	<import resource="classpath:/spring-hibernate.xml"/>
 	<import resource="classpath:/spring-shiro.xml"/>
+	<!-- *************************************扫描********************************************** -->
+	<!-- 配置自动扫描的包 -->
 	
+	<!-- 扫描dao包下@repository的组件 -->
+	<context:component-scan base-package="cn.gavin.dao"></context:component-scan>
+	
+	<!-- 扫描cn.gavin.service包下所有标注@service的服务组件 -->
+	<context:component-scan base-package="cn.gavin.service"></context:component-scan>
+	
+	<!-- 扫描cn.gavin.domain包下所有标注@Entity的服务组件 -->
+	<context:component-scan base-package="cn.gavin.domain"></context:component-scan>
+	
+	<context:component-scan base-package="cn.gavin.shiro.realm"></context:component-scan>
 	
 	
 	

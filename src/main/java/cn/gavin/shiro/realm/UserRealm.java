@@ -44,7 +44,7 @@ public class UserRealm extends AuthorizingRealm{
 		// 根据自己系统规则的需要编写获取授权信息，这里为了快速入门只获取了用户对应角色的资源url信息
 		String userName = (String) pc.fromRealm(getName()).iterator().next();
 		if (userName != null) {
-			Set<Role> roles= userService.getRoleByUserName(userName);
+			Set<Role> roles= userService.getUserByUserName(userName).getRoles();
 			if (roles != null && !roles.isEmpty()) {
 				HashSet<String> ro= new HashSet<String>();
 				for (Role each : roles) {

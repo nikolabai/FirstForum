@@ -5,9 +5,13 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
+
+
+
 @Service
 public class Anno {
 	 public void login(){
+		 System.out.println("进入anno");
 
 	        Subject currenUser = SecurityUtils.getSubject();
 	        UsernamePasswordToken token = new UsernamePasswordToken("admin","123");

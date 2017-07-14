@@ -2,6 +2,9 @@ package cn.gavin.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cn.gavin.domain.Topic;
@@ -12,8 +15,19 @@ import cn.gavin.domain.Topic;
  * @author Gavin
  * @2017年5月28日
  */
+
 @Repository
 public class TopicDao extends BaseDao<Topic>{
+	@Autowired
+	private SessionFactory sessionFactory;  
+	public void setSessionFactory(SessionFactory sessionFactory) {   
+		this.sessionFactory = sessionFactory;   
+	}     
+	public Session getSession() {    
+		return sessionFactory.getCurrentSession();   
+	}  
+	
+	
 	private final String GET_BOARD_DIGEST_TOPICS="from Topic t where t.board=? and digest>0 order by t.lastPost desc,digest desc";
 	private final String GET_PAGED_TOPICS="from Topic where boardld=? order by lastPost desc";
 	private final String QUERY_TOPIC_BY_TITLE = "from Topic where topic Title like ? order by lastPost desc";

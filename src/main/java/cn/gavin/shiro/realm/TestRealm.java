@@ -16,7 +16,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
- * 静态资源测试realm授权验证
+ * 1\静态资源测试realm授权验证
  * @author Gavin
  * @2017年7月13日
  */

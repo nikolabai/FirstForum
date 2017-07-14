@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>login</h1>
-    <form action="login">
+    <form action="JSPlogin">
         <label>userName:</label>
         <input type="text" name="userName"/>
         <label>password:</label>
