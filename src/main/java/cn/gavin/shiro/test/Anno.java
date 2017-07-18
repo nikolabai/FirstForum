@@ -1,4 +1,4 @@
-package cn.gavin.shiro.realm;
+package cn.gavin.shiro.test;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -24,7 +24,7 @@ public class Anno {
 	     */
 	    @RequiresPermissions({"printer:print"})
 	    public void testAnnotation(){
-	        System.out.println("使用注解方式。。。");
+	        System.out.println("使用注解方式授权成功！");
 	    }
 
 }

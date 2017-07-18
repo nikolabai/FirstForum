@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>测试shiro</title>
+<title>shiro登陆</title>
 </head>
 <body>
-<form action="shiroLoginin" method="post">
-用户名:<input type="text" name="userName"/> <br/>
-密码:<input type="text" name="password"/><br/>
+<form action="shirodoLogin" method="post">
+<label>username:</label>
+<input type="text" name="userName"/> <br/>
+<label>password:</label> 
+<input type="text" name="password"/><br/>
 <input type="submit" value="登录" />
 </form>
 </body>

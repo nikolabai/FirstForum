@@ -1,4 +1,4 @@
-package cn.gavin.shiro.realm;
+package cn.gavin.shiro.test;
 
 import org.apache.shiro.SecurityUtils;
 
@@ -21,12 +21,13 @@ import org.slf4j.LoggerFactory;
 public class MainProgramming {
 	private static final Logger logger = LoggerFactory.getLogger(MainProgramming.class);
 	public static void main(String[] args) {
-		//获取SecurityManager的实例
+		//1.获取SecurityManager工厂，此处使用ini配置文件初始化SecurityManager
         Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro-realm.ini");
+        
+        // 2.获取SecurityManager实例，并绑定到SecurityUtils
         org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
-
         SecurityUtils.setSecurityManager(securityManager);
-
+        //3.得到Subject
         Subject currenUser = SecurityUtils.getSubject();
 
         //如果还未认证

@@ -1,13 +1,8 @@
-div.main-forum{
-    background-color: #337ab7;
-    height: 160px;
-    margin:10px 20px 40px 40px;
+a{
+    display: block; /* 设置为块元素 */
+    width: 300px;
+    height: 100px;
+    line-height: 100px; /* 设置垂直居中 */
     text-align: center;
-    color: #f5f5f5;
-    padding: 20px;
-
-}
-div a:hover{
-    text-decoration: none;
-
+    border: 1px solid #ccc;
 }

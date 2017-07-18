@@ -51,11 +51,11 @@ public class User implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int getUserid() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserid(int userid) {
-		this.userId = userid;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getUserName() {
 		return userName;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.gavin.domain.User;
-import cn.gavin.shiro.realm.Anno;
+import cn.gavin.shiro.test.Anno;
 
 /**
  * 
@@ -25,53 +25,14 @@ import cn.gavin.shiro.realm.Anno;
 public class ShiroController {
 	private static final Logger logger = LoggerFactory.getLogger(ShiroController.class);
 	
-	@Autowired
-	private Anno anno;
-	
-	
-	
-	
-	
-	@RequestMapping("/JSPlogin")
-    public String test(String userName,String password){
-        System.out.println("userName:"+userName);
-        System.out.println("password"+password);
-
-        //登录
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
-        Subject currentUser = SecurityUtils.getSubject();
-        //如果登录失败，会抛异常，应该要捕捉异常
-        currentUser.login(token);
-
-        if(currentUser.isAuthenticated()){
-            System.out.println("认证成功");
-            //有权限才能调用该方法，没权限将抛异常
-            anno.testAnnotation();
-        }
-
-        return "successshiro";
-    }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
     /**
-     * 判断用户是否登录
+     * shiro登陆  授权
      * @param currUser
      * @return
      */
-    @RequestMapping(value = "/shiroLoginin",method=RequestMethod.POST)
+    @RequestMapping(value = "/shirodoLogin",method=RequestMethod.POST)
     public String isLogin(User currUser){
-    	logger.info("进入");
+    	logger.info("进入shirocontroller");
         Subject user = SecurityUtils.getSubject();
         
         //加密（md5+盐），返回一个32位的字符串小写  
@@ -82,14 +43,13 @@ public class ShiroController {
         //传递token给shiro的realm 
         UsernamePasswordToken token = new UsernamePasswordToken(currUser.getUserName(),currUser.getPassword());
         
-//      但是，“已记住”和“已认证”是有区别的： 
-//      已记住的用户仅仅是非匿名用户，你可以通过subject.getPrincipals()获取用户信息。但是它并非是完全认证通过的用户，当你访问需要认证用户的功能时，你仍然需要重新提交认证信息。 
-//      这一区别可以参考亚马逊网站，网站会默认记住登录的用户，再次访问网站时，对于非敏感的页面功能，页面上会显示记住的用户信息，但是当你访问网站账户信息时仍然需要再次进行登录认证。 
+        //“已记住”和“已认证”是有区别的： 
+        //已记住的用户仅仅是非匿名用户，你可以通过subject.getPrincipals()获取用户信息。但是它并非是完全认证通过的用户，当你访问需要认证用户的功能时，你仍然需要重新提交认证信息。 
+        //这一区别可以参考亚马逊网站，网站会默认记住登录的用户，再次访问网站时，对于非敏感的页面功能，页面上会显示记住的用户信息，但是当你访问网站账户信息时仍然需要再次进行登录认证。 
         token.setRememberMe(true);
-        System.out.println(currUser);
+        
         try {
-        	//这句是提交申请，验证能不能通过，也就是交给公安局同志了。这里会回调reaml里的一个方法
-            // 回调doGetAuthenticationInfo，进行认证
+        	//这句是提交申请，验证能不能通过。这里会回调realm里的一个方法doGetAuthenticationInfo
             user.login(token);
             return "/success";
         }catch (AuthenticationException e) {

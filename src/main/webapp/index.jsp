@@ -5,14 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页</title>
-	
 </head>
-<body>
 
-<p>首页</p>
-<a href="/FirstForum/login.jsp">登陆</a>
+
+<body background="image/background.jpg">
+<center>
+<img src="<%=request.getContextPath()%>/image/home.png" />
+<p>
+<a href="/FirstForum/login.jsp">普通登陆</a>
 <a href="/FirstForum/register.jsp">注册</a>
-<a href="/FirstForum/shiroLogin.jsp">shrio登陆</a>
-<a href="/FirstForum/jsplogin.jsp">jsp标签授权登陆</a>
+<a href="/FirstForum/shiroLogin.jsp">Shiro登陆</a>
+<a href="/FirstForum/home.jsp">游客</a>
+<a href="/FirstForum/home.jsp">忘记密码</a>
+</p>
+</center>
 </body>
 </html>

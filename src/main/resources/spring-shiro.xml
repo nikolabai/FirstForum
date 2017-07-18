@@ -16,7 +16,7 @@
 	
 	
 	<!-- 1、項目自定义的Realm -->
-    <bean id="myRealm" class="cn.gavin.shiro.realm.TestRealm" ></bean>
+    <bean id="myRealm" class="cn.gavin.shiro.realm.UserRealm" ></bean>
     
     <!-- 2、添加securityManager定义  -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"> 

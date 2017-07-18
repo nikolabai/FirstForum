@@ -1,4 +1,4 @@
-package cn.gavin.shiro.realm;
+package cn.gavin.shiro.test;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +15,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cn.gavin.shiro.realm.UserRealm;
 /**
  * 1\静态资源测试realm授权验证
  * @author Gavin
@@ -50,7 +52,7 @@ private static final Logger logger =LoggerFactory.getLogger(UserRealm.class);
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-    	logger.info("进入登陆realm");
+    	logger.info("进入登陆TESTrealm");
     	//用户名
         String username = (String) authcToken.getPrincipal();
         logger.info("username:"+username);

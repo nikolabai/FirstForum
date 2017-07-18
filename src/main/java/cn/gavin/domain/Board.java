@@ -30,6 +30,9 @@ public class Board implements Serializable{
 	private String boardName;
 	private String boardDesc;
 	private int topicNum;
+	
+	
+	
 	public int getBoardId() {
 		return boardId;
 	}

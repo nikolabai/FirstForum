@@ -293,11 +293,12 @@
 		</dependency>
 		
 		<!--7.14 不知道干什么用的  -->
-		<dependency>
+		<!-- hibernate-core已经包括了javassitst -->
+		<!-- <dependency>
     		<groupId>javassist</groupId>
     		<artifactId>javassist</artifactId>
     		<version>3.12.1.GA</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
     		<groupId>commons-beanutils</groupId>
     		<artifactId>commons-beanutils</artifactId>

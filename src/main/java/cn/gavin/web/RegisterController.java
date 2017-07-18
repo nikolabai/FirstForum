@@ -36,7 +36,17 @@ public class RegisterController extends BaseController{
 	@Autowired
 	private UserDao userDao;
 	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
-	//用户注册
+	
+	
+	
+	
+	
+	/**
+	 * 用户注册
+	 * @param request
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping(value="/register")
 	public ModelAndView register(HttpServletRequest request, User user){
 //	public ModelAndView register(@RequestParam("userName") String userName, @RequestParam("password") String password){
@@ -68,17 +78,19 @@ public class RegisterController extends BaseController{
 	return "register"; 
 	}
 	
-	
+	/**
+	 * ajax检查用户名是否已经存在
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value="/checkUserName",method = RequestMethod.POST)  
     public String checkUserName(HttpServletRequest request, HttpServletResponse response) throws IOException{  
         String userName=(String)request.getParameter("userName");  
-        System.out.println(userName);
-        System.out.println(request.getParameter("userName"));
         //检验用户名是否存在  
         //用户名是否存在的标志  
         User uz = userDao.getUserByUserName(userName);
-        System.out.println("zz");
-        System.out.println(uz);//null
         boolean flag;
         if(uz!=null){
 			 flag=true;

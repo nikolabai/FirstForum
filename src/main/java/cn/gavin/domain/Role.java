@@ -31,9 +31,7 @@ public class Role implements Serializable{
     @Column(length=50)
     private String description;
     
-    
     private Set<User> users;
-    
     
     private Set<Permission> permissions;
     

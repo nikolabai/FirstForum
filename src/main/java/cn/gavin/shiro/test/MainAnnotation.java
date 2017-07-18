@@ -1,4 +1,4 @@
-package cn.gavin.shiro.realm;
+package cn.gavin.shiro.test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

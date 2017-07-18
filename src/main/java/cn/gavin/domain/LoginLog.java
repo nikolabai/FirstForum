@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,7 +29,7 @@ public class LoginLog implements Serializable{
 	private int loginLogId;
 	private String ip;
 	private Date loginDate;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	

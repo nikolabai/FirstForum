@@ -9,12 +9,11 @@
 </head>
 <body>
 <center>  
-<h1><b>登陆成功</b></h1>  
-用户名：${user.userName}<br>
+<h1><b>游客登陆</b></h1>  
+
 <h1>用户拥有权限</h1>
     <!-- 如果当前用户有printer:print权限，标签内的内容才显示 -->
     <shiro:hasRole name="regular">注册用户</shiro:hasRole>
     <shiro:hasRole name="visitor">游客</shiro:hasRole>
 </center>  
 </body>
-</html>

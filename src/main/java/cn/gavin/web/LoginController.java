@@ -30,7 +30,15 @@ public class LoginController extends BaseController{
 	@Autowired
 	private UserService userService;
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	//用户登陆
+
+
+	
+	/**
+	 * 用户登陆，普通，未用shiro
+	 * @param request
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping("/doLogin")
 	public ModelAndView login(HttpServletRequest request,User user){
 		logger.info("调用controller");
@@ -49,6 +57,8 @@ public class LoginController extends BaseController{
 		}else{
 			dbUser.setLastIp(request.getRemoteAddr());
 			dbUser.setLastVisit(new Date());
+			
+			
 			userService.loginSuccess(dbUser);
 			setSessionUser(request, dbUser);
 //			String toUrl = (String) request.getSession().getAttribute(Constants.LOGIN_TO_URL);

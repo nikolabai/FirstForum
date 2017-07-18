@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-7-12 9:54:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="cn.gavin.domain.UserRole" table="USERROLE">
+    <class name="cn.gavin.domain.UserRole" table="USERROLE" lazy="false">
         <id name="id" type="int">
             <column name="ID" />
             <generator class="assigned" />

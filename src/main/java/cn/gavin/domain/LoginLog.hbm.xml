@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-7-12 9:54:04 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-7-17 15:46:31 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="cn.gavin.domain.LoginLog" table="LOGINLOG">
         <id name="loginLogId" type="int">
             <column name="LOGINLOGID" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="ip" type="java.lang.String">
             <column name="IP" />
@@ -14,6 +14,8 @@
         <property name="loginDate" type="java.util.Date">
             <column name="LOGINDATE" />
         </property>
-        <one-to-one name="user" class="cn.gavin.domain.User"></one-to-one>
+        <many-to-one name="user" class="cn.gavin.domain.User" fetch="join">
+            <column name="USER" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

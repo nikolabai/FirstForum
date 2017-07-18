@@ -6,7 +6,7 @@
     <class name="cn.gavin.domain.User" table="USER">
         <id name="userId" type="int" access="field">
             <column name="USERID" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="userName" type="java.lang.String">
             <column name="USERNAME" />

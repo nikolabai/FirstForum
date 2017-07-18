@@ -23,7 +23,7 @@ public class UsrDaoTest extends TestCase{
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao ud=(UserDao) context.getBean("userDao");
 		User u =new User();
-		u.setUserid(9);
+		u.setUserId(9);
 		u.setUserName("tom");
 		u.setPassword("12345");
 		ud.save(u);
