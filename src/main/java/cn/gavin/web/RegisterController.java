@@ -73,7 +73,7 @@ public class RegisterController extends BaseController{
 	
 	
 	
-	@RequestMapping(value="/index",method=RequestMethod.GET) 
+	@RequestMapping(value="/inde",method=RequestMethod.GET) 
 	public String index(){ 
 	return "register"; 
 	}

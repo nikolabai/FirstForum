@@ -1,132 +1,116 @@
 package cn.gavin.dao;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
- * @author Gavin
- * @2017年5月28日
+ * 分页对象. 包含当前页数据及分页信息如总记录数.
+ *
  */
-@SuppressWarnings("unchecked")
-public class Page {
-	 private List list;// 要返回的某一页的记录列表
-	     private int allRow; // 总记录数
-	     private int totalPage; // 总页数
-	     private int currentPage; // 当前页
-	     private int pageSize;// 每页记录数
-	     
-	     @SuppressWarnings("unused")
-	     private boolean isFirstPage; // 是否为第一页
-	     @SuppressWarnings("unused")
-	     private boolean isLastPage;// 是否为最后一页
-	     @SuppressWarnings("unused")
-	     private boolean hasPreviousPage; // 是否有前一页
-	     @SuppressWarnings("unused")
-	     private boolean hasNextPage;// 是否有下一页
-	 
-	     public List getList() {
-	         return list;
-	     }
-	 
-	     public void setList(List list) {
-	         this.list = list;
-	     }
-	 
-	     public int getAllRow() {
-	         return allRow;
-	     }
-	 
-	     public void setAllRow(int allRow) {
-	         this.allRow = allRow;
-	     }
-	 
-	     public int getTotalPage() {
-	         return totalPage;
-	     }
-	 
-	     public void setTotalPage(int totalPage) {
-	         this.totalPage = totalPage;
-	     }
-	 
-	     public int getCurrentPage() {
-	         return currentPage;
-	     }
-	 
-	     public void setCurrentPage(int currentPage) {
-	         this.currentPage = currentPage;
-	     }
-	 
-	     public int getPageSize() {
-	         return pageSize;
-	     }
-	 
-	     public void setPageSize(int pageSize) {
-	         this.pageSize = pageSize;
-	     }
-	 
-	     /**
-	      * 初始化分页信息
-	      */
-	     public void init() {
-	         this.isFirstPage = isFirstPage();
-	         this.isLastPage = isLastPage();
-	         this.hasPreviousPage = isHasPreviousPage();
-	         this.hasNextPage = isHasNextPage();
-	     }
-	 
-	     /**
-	      * 以下判断页的信息,只需getter方法(is方法)即可
-	      * 
-	      * @return
-	      */
-	     public boolean isFirstPage() {
-	         return currentPage == 1; // 如是当前页是第1页
-	     }
-	 
-	     public boolean isLastPage() {
-	         return currentPage == totalPage; // 如果当前页是最后一页
-	     }
-	 
-	     public boolean isHasPreviousPage() {
-	         return currentPage != 1;// 只要当前页不是第1页
-	     }
-	 
-	     public boolean isHasNextPage() {
-	         return currentPage != totalPage; // 只要当前页不是最后1页
-	     }
-	 
-	     /**
-	      * 计算总页数,静态方法,供外部直接通过类名调用
-	      * 
-	      * @param pageSize每页记录数
-	      * @param allRow总记录数
-	     * @return 总页数
-	     */
-	    public static int countTotalPage(final int pageSize, final int allRow) {
-	        int totalPage = allRow % pageSize == 0 ? allRow / pageSize : allRow / pageSize + 1;
-	        return totalPage;
-	    }
-	
-	    /**
-	     * 计算当前页开始记录
-	     * 
-	     * @param pageSize每页记录数
-	     * @param currentPage当前第几页
-	     * @return 当前页开始记录号
-	     */
-	    public static int countpageNo(final int pageSize, final int currentPage) {
-	        final int pageNo = pageSize * (currentPage - 1);
-	        return pageNo;
-	    }
-	
-	    /**
-	     * 计算当前页,若为0或者请求的URL中没有"?page=",则用1代替
-	     * 
-	     * @paramPage 传入的参数(可能为空,即0,则返回1)
-	     * @return 当前页
-	     */
-	    public static int countCurrentPage(int page) {
-	        final int curPage = (page == 0 ? 1 : page);
-	        return curPage;
-	    }
+public class Page implements Serializable {
+
+	private static int DEFAULT_PAGE_SIZE = 20;
+
+	private int pageSize = DEFAULT_PAGE_SIZE; // 每页的记录数
+
+	private long start; // 当前页第一条数据在List中的位置,从0开始
+
+	private List data; // 当前页中存放的记录,类型一般为List
+
+	private long totalCount; // 总记录数
+
+	/**
+	 * 构造方法，只构造空页.
+	 */
+	public Page() {
+		this(0, 0, DEFAULT_PAGE_SIZE, new ArrayList());
+	}
+
+	/**
+	 * 默认构造方法.
+	 *
+	 * @param start	 本页数据在数据库中的起始位置
+	 * @param totalSize 数据库中总记录条数
+	 * @param pageSize  本页容量
+	 * @param data	  本页包含的数据
+	 */
+	public Page(long start, long totalSize, int pageSize, List data) {
+		this.pageSize = pageSize;
+		this.start = start;
+		this.totalCount = totalSize;
+		this.data = data;
+	}
+
+	/**
+	 * 取总记录数.
+	 */
+	public long getTotalCount() {
+		return this.totalCount;
+	}
+
+	/**
+	 * 取总页数.
+	 */
+	public long getTotalPageCount() {
+		if (totalCount % pageSize == 0)
+			return totalCount / pageSize;
+		else
+			return totalCount / pageSize + 1;
+	}
+
+	/**
+	 * 取每页数据容量.
+	 */
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	/**
+	 * 取当前页中的记录.
+	 */
+	public List getResult() {
+		return data;
+	}
+
+	/**
+	 * 取该页当前页码,页码从1开始.
+	 */
+	public long getCurrentPageNo() {
+		return start / pageSize + 1;
+	}
+
+	/**
+	 * 该页是否有下一页.
+	 */
+	public boolean isHasNextPage() {
+		return this.getCurrentPageNo() < this.getTotalPageCount();
+	}
+
+	/**
+	 * 该页是否有上一页.
+	 */
+	public boolean isHasPreviousPage() {
+		return this.getCurrentPageNo() > 1;
+	}
+
+	/**
+	 * 获取任一页第一条数据在数据集的位置，每页条数使用默认值.
+	 *
+	 * @see #getStartOfPage(int,int)
+	 */
+	protected static int getStartOfPage(int pageNo) {
+		return getStartOfPage(pageNo, DEFAULT_PAGE_SIZE);
+	}
+
+	/**
+	 * 获取任一页第一条数据在数据集的位置.
+	 *
+	 * @param pageNo   从1开始的页号
+	 * @param pageSize 每页记录条数
+	 * @return 该页第一条数据
+	 */
+	public static int getStartOfPage(int pageNo, int pageSize) {
+		return (pageNo - 1) * pageSize;
+	}
 }

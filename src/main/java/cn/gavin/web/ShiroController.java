@@ -1,5 +1,7 @@
 package cn.gavin.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.gavin.domain.User;
+import cn.gavin.service.UserService;
 import cn.gavin.shiro.test.Anno;
 
 /**
@@ -22,16 +25,17 @@ import cn.gavin.shiro.test.Anno;
  */
 
 @Controller
-public class ShiroController {
+public class ShiroController extends BaseController{
 	private static final Logger logger = LoggerFactory.getLogger(ShiroController.class);
-	
+	@Autowired
+	private UserService userService;
     /**
      * shiro登陆  授权
      * @param currUser
      * @return
      */
     @RequestMapping(value = "/shirodoLogin",method=RequestMethod.POST)
-    public String isLogin(User currUser){
+    public String isLogin(HttpServletRequest request,User currUser){
     	logger.info("进入shirocontroller");
         Subject user = SecurityUtils.getSubject();
         
@@ -51,7 +55,8 @@ public class ShiroController {
         try {
         	//这句是提交申请，验证能不能通过。这里会回调realm里的一个方法doGetAuthenticationInfo
             user.login(token);
-            return "/success";
+            setSessionUser(request, userService.getUserByUserName(currUser.getUserName()));
+            return "redirect:/index";
         }catch (AuthenticationException e) {
             logger.error("登录失败错误信息:"+e);
             token.clear();

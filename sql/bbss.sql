@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-07-18 17:33:07
+Date: 2017-07-21 17:07:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,9 @@ CREATE TABLE `board` (
 -- ----------------------------
 -- Records of board
 -- ----------------------------
+INSERT INTO `board` VALUES ('1', '体育', '世界杯', '0');
+INSERT INTO `board` VALUES ('2', '娱乐', '格莱美', '1');
+INSERT INTO `board` VALUES ('3', '文学', '死亡诗社', '3');
 
 -- ----------------------------
 -- Table structure for loginlog
@@ -43,7 +46,7 @@ CREATE TABLE `loginlog` (
   PRIMARY KEY (`LOGINLOGID`),
   KEY `FK_1trod57oade11hftwydjykg4n` (`USER`),
   CONSTRAINT `FK_1trod57oade11hftwydjykg4n` FOREIGN KEY (`USER`) REFERENCES `user` (`USERID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of loginlog
@@ -51,6 +54,8 @@ CREATE TABLE `loginlog` (
 INSERT INTO `loginlog` VALUES ('1', '127.0.0.1', '2017-07-17 15:54:02', '1');
 INSERT INTO `loginlog` VALUES ('2', '127.0.0.1', '2017-07-18 15:19:57', '1');
 INSERT INTO `loginlog` VALUES ('3', '127.0.0.1', '2017-07-18 15:20:29', '2');
+INSERT INTO `loginlog` VALUES ('4', '127.0.0.1', '2017-07-19 20:56:31', '1');
+INSERT INTO `loginlog` VALUES ('5', '127.0.0.1', '2017-07-19 20:58:28', '1');
 
 -- ----------------------------
 -- Table structure for permission
@@ -157,8 +162,8 @@ DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic` (
   `TOPICID` int(11) NOT NULL,
   `BOARD` int(11) DEFAULT NULL,
-  `TOPLICTITLE` varchar(255) DEFAULT NULL,
-  `CREATTIME` datetime DEFAULT NULL,
+  `TOPICTITLE` varchar(255) DEFAULT NULL,
+  `CREATETIME` datetime DEFAULT NULL,
   `LASTPOST` datetime DEFAULT NULL,
   `VIEWS` int(11) DEFAULT NULL,
   `REPLIES` int(11) DEFAULT NULL,
@@ -175,6 +180,10 @@ CREATE TABLE `topic` (
 -- ----------------------------
 -- Records of topic
 -- ----------------------------
+INSERT INTO `topic` VALUES ('1', '3', '沁园春', '2017-07-21 15:43:42', '2017-07-21 15:43:50', '1', '1', '1', '1', 'hah ');
+INSERT INTO `topic` VALUES ('2', '3', '再别康桥', '2017-07-21 15:43:45', '2017-07-21 15:43:53', '2', '2', '2', '1', 'hah ');
+INSERT INTO `topic` VALUES ('3', '3', '锦瑟', '2017-07-21 15:43:48', '2017-07-21 15:43:56', '3', '3', '3', '1', 'haha');
+INSERT INTO `topic` VALUES ('4', '3', '史记', '2017-07-21 17:00:48', '2017-07-21 17:00:51', '4', '4', '4', '1', 'DD');
 
 -- ----------------------------
 -- Table structure for user
@@ -195,7 +204,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'nick', '123', '1', '0', '135', '2017-07-18 15:19:57', '127.0.0.1');
+INSERT INTO `user` VALUES ('1', 'nick', '123', '1', '0', '145', '2017-07-19 20:58:28', '127.0.0.1');
 INSERT INTO `user` VALUES ('2', 'admin', '123', '1', '0', '110', '2017-07-18 15:20:29', '127.0.0.1');
 INSERT INTO `user` VALUES ('6', 'hemingway', '82ab0733681f5a45e8ca849753bf47f6', '1', '0', '100', null, null);
 INSERT INTO `user` VALUES ('7', 'jack', 'b82d913882cf3384328d33cc5da5381e', '1', '0', '100', null, null);

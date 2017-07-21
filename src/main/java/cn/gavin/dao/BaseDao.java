@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import cn.gavin.domain.Topic;
+
 
 
 /**
@@ -125,16 +131,38 @@ public class BaseDao<T> {
 //	}
 	
 	/*********************************HQL*************************************/
-	//分页查询
-	public List<?> queryForPage(String hql,int pageNo,int pageSize) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(hql);
-        List list = session.createQuery(hql)
-                        .setFirstResult(pageNo)
-                        .setMaxResults(pageSize)
-                        .list();                   
-                return list;
+	/**
+	 * 分页查询函数，使用hql.
+	 *
+	 * @param pageNo 页号,从1开始.
+	 */
+	public Page queryForPage(String hql, int pageNo, int pageSize ,Object value) {
+		Assert.hasText(hql);
+		Assert.isTrue(pageNo >= 1, "pageNo should start from 1");
+		// Count查询
+		String countQueryString = " select count (*) " + removeSelect(removeOrders(hql));
+		Query query2 = getSession().createQuery(countQueryString);
+		List countlist = query2.setParameter(0, value).list();
+		long totalCount = (Long) countlist.get(0);
+		// 实际查询返回分页对象
+		int startIndex = Page.getStartOfPage(pageNo, pageSize);
+		
+		
+		Query query = getSession().createQuery(hql);
+		List list = query.setFirstResult(startIndex)
+						.setMaxResults(pageSize)
+						.setParameter(0, value)
+						.list();
+		// Count查询
+//		long totalCount =  ((Long)( query.setParameter(0, value).iterate().next())).intValue();
+//
+//		if (totalCount < 1){
+//			return new Page();
+//		}
+
+		return new Page(startIndex, totalCount, pageSize, list);
 	}
+
     //总记录条数
 	@Transactional
 	public int getCount(String hql) {
@@ -143,7 +171,34 @@ public class BaseDao<T> {
 		int count = ( (Long) query.iterate().next()).intValue();
 		return count; 
 	}
+	/**
+	 * 去除hql的select 子句，未考虑union的情况,用于pagedQuery.
+	 *
+	 * @see #pagedQuery(String,int,int,Object[])
+	 */
+	private static String removeSelect(String hql) {
+		Assert.hasText(hql);
+		int beginPos = hql.toLowerCase().indexOf("from");
+		Assert.isTrue(beginPos != -1, " hql : " + hql + " must has a keyword 'from'");
+		return hql.substring(beginPos);
+	}
+	/**
+	 * 去除hql的orderby 子句，用于pagedQuery.
+	 *
+	 * @see #pagedQuery(String,int,int,Object[])
+	 */
+	private static String removeOrders(String hql) {
+		Assert.hasText(hql);
+		Pattern p = Pattern.compile("order\\s*by[\\w|\\W|\\s|\\S]*", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(hql);
+		StringBuffer sb = new StringBuffer();
+		while (m.find()) {
+			m.appendReplacement(sb, "");
+		}
+		m.appendTail(sb);
+		return sb.toString();
+	}
 				
-		
+	
 	
 }

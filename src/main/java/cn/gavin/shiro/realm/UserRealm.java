@@ -148,6 +148,7 @@ public class UserRealm extends AuthorizingRealm{
     	UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = userService.getUserByUserName(token.getUsername());
         if (user != null) {
+        	
         	return new SimpleAuthenticationInfo(user.getUserName(), user
         				.getPassword(), getName());
         } else {

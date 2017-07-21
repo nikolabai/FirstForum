@@ -13,10 +13,13 @@
 <img src="<%=request.getContextPath()%>/image/home.png" />
 <p>
 <a href="/FirstForum/login.jsp">普通登陆</a>
-<a href="/FirstForum/register.jsp">注册</a>
 <a href="/FirstForum/shiroLogin.jsp">Shiro登陆</a>
-<a href="/FirstForum/home.jsp">游客</a>
+<a href="/FirstForum/register.jsp">注册</a>
+<a href="/FirstForum/index2.jsp">游客</a>
 <a href="/FirstForum/home.jsp">忘记密码</a>
+</p>
+<p>
+Powered by GoodBai
 </p>
 </center>
 </body>

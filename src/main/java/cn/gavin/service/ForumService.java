@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.gavin.dao.BoardDao;
+import cn.gavin.dao.Page;
 import cn.gavin.dao.PostDao;
 import cn.gavin.dao.TopicDao;
 import cn.gavin.dao.UserDao;
@@ -105,9 +106,9 @@ public class ForumService {
 		user.setCredit(user.getCredit()+100);
 	}
 	//8.获取论坛版块某一页主题，以最后回复时间降序排列
-	public List getPagedTopic(int boardId,int pageNo,int pageSize){
-		return topicDao.getPagedTopic(boardId, pageNo, pageSize);
-	}
+//	public List getPagedTopic(int boardId,int pageNo,int pageSize){
+//		return topicDao.getPagedTopic(boardId, pageNo, pageSize);
+//	}
 	//9.获取同主题每一页帖子，以最后回复时间降序排列
 	public List<Post> getPagedPosts(int topicId,int pageNo,int pageSize){
 		return postDao.getPagePosts(topicId,pageNo,pageSize);
@@ -123,5 +124,28 @@ public class ForumService {
 //			userDao.update(user);
 //		}
 //	}
+	/**
+     * 获取所有的论坛版块
+     * @return
+     */
+    public List<Board> getAllBoards(){
+        return boardDao.loadAll();
+    }
+	/**
+	 * 根据boardId获取Board对象
+	 * 
+	 * @param boardId
+	 */
+	public Board getBoardById(int boardId) {
+		return boardDao.get(boardId);
+	}
+	/**
+	 * 获取论坛版块某一页主题帖，以最后回复时间降序排列
+	 * @param boardId
+	 * @return
+	 */
+    public Page getPagedTopics(Board board,int pageNo,int pageSize){
+		return topicDao.getPagedTopics(pageNo,pageSize,board);
+    }
 
 }

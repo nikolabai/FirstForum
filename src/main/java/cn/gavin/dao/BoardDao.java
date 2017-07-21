@@ -1,10 +1,14 @@
 package cn.gavin.dao;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import cn.gavin.domain.Board;
+import cn.gavin.domain.User;
 
 /**
  * 
@@ -30,4 +34,10 @@ public class BoardDao extends BaseDao<Board>{
 		return ((Long)(session.createQuery(GET_BOARD_NUM).iterate().next())).intValue();
 	}
 //	
+	public List<Board> loadAll() {
+		String hql="from Board b order by b.boardName desc";
+		Query query=getSession().createQuery(hql);  
+        List<Board> boardList=query.list();  
+        return boardList;  
+	}
 }

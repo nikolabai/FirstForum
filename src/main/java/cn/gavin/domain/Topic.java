@@ -33,8 +33,8 @@ public class Topic implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="board_id")
 	private Board board;
-	private String toplicTitle;
-	private Date creatTime;
+	private String topicTitle;
+	private Date createTime;
 	private Date lastPost;
 	private int views;
 	private int replies;
@@ -59,17 +59,17 @@ public class Topic implements Serializable{
 	public void setTopicId(int topicId) {
 		this.topicId = topicId;
 	}
-	public String getToplicTitle() {
-		return toplicTitle;
+	public String getTopicTitle() {
+		return topicTitle;
 	}
-	public void setToplicTitle(String toplicTitle) {
-		this.toplicTitle = toplicTitle;
+	public void setTopicTitle(String topicTitle) {
+		this.topicTitle = topicTitle;
 	}
-	public Date getCreatTime() {
-		return creatTime;
+	public Date getCreateTime() {
+		return createTime;
 	}
-	public void setCreatTime(Date creatTime) {
-		this.creatTime = creatTime;
+	public void setCreateTime(Date creatTime) {
+		this.createTime = creatTime;
 	}
 	public Date getLastPost() {
 		return lastPost;
@@ -110,8 +110,8 @@ public class Topic implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Topic [topicId=" + topicId + ", board=" + board + ", toplicTitle=" + toplicTitle + ", creatTime="
-				+ creatTime + ", lastPost=" + lastPost + ", views=" + views + ", replies=" + replies + ", digest="
+		return "Topic [topicId=" + topicId + ", board=" + board + ", toplicTitle=" + topicTitle + ", creatTime="
+				+ createTime + ", lastPost=" + lastPost + ", views=" + views + ", replies=" + replies + ", digest="
 				+ digest + ", user=" + user + ", topicText=" + topicText + "]";
 	}
 	

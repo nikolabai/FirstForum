@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.util.Assert;
 
+import cn.gavin.constants.Constants;
 import cn.gavin.domain.User;
 /**
  * 
@@ -17,13 +18,13 @@ public class BaseController {
 	
 	//1.获取保存在Session中的用户对象
 	protected User getSessionUser(HttpServletRequest request){
-		return (User)request.getSession().getAttribute("user");
+		return (User)request.getSession().getAttribute(Constants.USER_CONTEXT);
 		
 	}
 	
 	//2.将用户对象保存到Session中
 	protected  void setSessionUser(HttpServletRequest request,User user){
-		request.getSession().setAttribute("user",user);
+		request.getSession().setAttribute(Constants.USER_CONTEXT,user);
 	}
 	
 	//获取基于应用程序的URL绝对路径

@@ -11,11 +11,11 @@
         <many-to-one name="board" class="cn.gavin.domain.Board" fetch="join">
             <column name="BOARD" />
         </many-to-one>
-        <property name="toplicTitle" type="java.lang.String">
-            <column name="TOPLICTITLE" />
+        <property name="topicTitle" type="java.lang.String">
+            <column name="TOPICTITLE" />
         </property>
-        <property name="creatTime" type="java.util.Date">
-            <column name="CREATTIME" />
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATETIME" />
         </property>
         <property name="lastPost" type="java.util.Date">
             <column name="LASTPOST" />
